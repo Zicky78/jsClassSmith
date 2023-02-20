@@ -50,15 +50,22 @@
 
 // ----- MY VARIABLE CODE -----
 
-function calcBudget(paycheck, utilities, rent, phone, car, subscriptions){
+// function calcBudget(paycheck, utilities, rent, phone, car, subscriptions){
 
-    let budget = paycheck - utilities - rent - phone - car - subscriptions
-    let savings = budget*0.45
-    balance = budget - savings
-    let budgetReport = `The remaining budget after bills is: $${budget} \n$${savings}(45%) should go into savings \nRemaining total is: $${balance}`
+//     let budget = paycheck - utilities - rent - phone - car - subscriptions
+//     let savings = budget*0.45
+//     balance = budget - savings
+//     let budgetReport = `The remaining budget after bills is: $${budget} \n$${savings}(45%) should go into savings \nRemaining total is: $${balance}`
 
-    return budgetReport
+//     return budgetReport
     
-}
+// }
 
-console.log(calcBudget(2500, 400, 370, 100, 415, 30))
+// console.log(calcBudget(2500, 400, 370, 100, 415, 30))
+
+//-------------------------------------------------------
+doMoreMath = (a, b) => a * b
+console.log(doMoreMath(20, 30))
+//-------------------------------------------------------
+
+
