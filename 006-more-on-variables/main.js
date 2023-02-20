@@ -28,4 +28,16 @@ console.log(`myVar is tyepof ${ typeof myVar}`)
 let newestVar = null
 console.log(`myVar is also typeof ${typeof newestVar}`)
 
+// My variable code
 
+let apple = 0;
+let orange = false;
+
+console.log(apple == orange)
+console.log(apple === orange)
+
+let x
+let y = null
+
+console.log(x == y)
+console.log(x === y)
