@@ -7,3 +7,11 @@ const updateDOM = (input) => {
 }
 
 updateDOM('and put the FUN in functions!')
+
+const mileage = (miles, gallons, price = 3.79) => miles/gallons * price
+
+updateDOM(mileage(300, 10, 5.40))
+
+const acceleration = (initialV, finalV, startTime, endTime) => { return (finalV-initialV)/(endTime-startTime)}
+
+updateDOM(`${acceleration(20, 39, 0, 3)} m/s\u{00B2}`)
