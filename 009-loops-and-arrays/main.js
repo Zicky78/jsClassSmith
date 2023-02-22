@@ -37,6 +37,19 @@ const calculateAvgCost = () => {
     updateDOM(`Average Cost is: $${avgCost.toFixed(2)}`)
 }
 
+const calculateAvg = () => {
+    let sumMPG = 0
+    let sumTripCost = 0
+    for(let i = 0; i < myMPG.length; i++) {
+        sumMPG += myMPG[i]
+        sumTripCost += myTripCost[i]
+    }
+    let avgMPG = sumMPG/myMPG.length
+    let avgTripCost = sumTripCost/myTripCost.length
+
+    updateDOM(`Average MPG is ${avgMPG.toFixed(2)}`)
+    updateDOM(`Average Trip Cost is ${avgTripCost.toFixed(2)}`)
+}
 
 updateDOM(trackMPGandCost(300, 10, 5.40))
 updateDOM(trackMPGandCost(320, 20, 3.20))
@@ -48,4 +61,6 @@ updateDOM(trackMPGandCost(320, 12, 5.00))
 
 calculateAvgMPG()
 calculateAvgCost()
+
+calculateAvg()
 
