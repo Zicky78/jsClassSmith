@@ -20,8 +20,9 @@ const myArr = []
 
 const trackMPGCost = (miles, gallons, price = 3.79) => {
     const MPG = miles/gallons 
-    const tripCost = MPG * price
+    const tripCost = gallons * price
     myArr.push(MPG, tripCost)
+    return `MPG: ${MPG} \n Trip Cost: $${tripCost}`
 }
 
 updateDOM(trackMPGCost(300, 10, 5.40))

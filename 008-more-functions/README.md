@@ -7,3 +7,7 @@
 # Does this array concept make sense to you?
 
 ### Yep, arrays are great!
+
+# Troubleshooting
+
+### There was no return statement, so updateDOM was not being sent any input. The trip cost price should be gallons * price, instead of PMG * price
