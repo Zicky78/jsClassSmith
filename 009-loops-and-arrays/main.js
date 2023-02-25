@@ -6,49 +6,54 @@ const updateDOM = (input) => {
     divEL.appendChild(h2)
 }
 
-const myMPG = []
-const myTripCost = []
+const MY_MPG = []
+const MY_TRIP_COST = []
 
 const trackMPGandCost = (miles, gallons, price = 3.79) => {
     const MPG = miles/gallons
     const tripCost = gallons * price
-    myMPG.push(MPG)
-    myTripCost.push(tripCost)
+    MY_MPG.push(MPG)
+    MY_TRIP_COST.push(tripCost)
     return `MPG: ${MPG.toFixed(2)} \n Trip Cost: $${tripCost.toFixed(2)}`
 }
 
 const calculateAvgMPG = () => {
     let totalMPG = 0
-    for(let i = 0; i < myMPG.length; i++){
-        totalMPG += myMPG[i]
+    for(let i = 0; i < MY_MPG.length; i++){
+        totalMPG += MY_MPG[i]
     }
 
-    let avgMPG = totalMPG/myMPG.length
+    let avgMPG = totalMPG/MY_MPG.length
     updateDOM(`Average MPG is: ${avgMPG.toFixed(2)}`)
 }
 
 const calculateAvgCost = () => {
     let totalCost = 0
-    for(let i = 0; i < myTripCost.length; i++) {
-        totalCost += myTripCost[i]
+    for(let i = 0; i < MY_TRIP_COST.length; i++) {
+        totalCost += MY_TRIP_COST[i]
     }
 
-    let avgCost = totalCost/myTripCost.length
+    let avgCost = totalCost/MY_TRIP_COST.length
     updateDOM(`Average Cost is: $${avgCost.toFixed(2)}`)
 }
 
-const calculateAvg = () => {
-    let sumMPG = 0
-    let sumTripCost = 0
-    for(let i = 0; i < myMPG.length; i++) {
-        sumMPG += myMPG[i]
-        sumTripCost += myTripCost[i]
+const calculateSum = (arr) => {
+    let sum = 0
+    for(let i =0; i < arr.length; i++) {
+        sum += arr[i]
     }
-    let avgMPG = sumMPG/myMPG.length
-    let avgTripCost = sumTripCost/myTripCost.length
+    return sum
+}
+
+const calculateAvg = () => {
+    let sumMPG = calculateSum(MY_MPG)
+    let sumTripCost = calculateSum(MY_TRIP_COST);
+    
+    let avgMPG = sumMPG/MY_MPG.length
+    let avgTripCost = sumTripCost/MY_TRIP_COST.length
 
     updateDOM(`Average MPG is ${avgMPG.toFixed(2)}`)
-    updateDOM(`Average Trip Cost is ${avgTripCost.toFixed(2)}`)
+    updateDOM(`Average Trip Cost is $${avgTripCost.toFixed(2)}`)
 }
 
 updateDOM(trackMPGandCost(300, 10, 5.40))
