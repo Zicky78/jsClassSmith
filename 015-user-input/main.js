@@ -119,5 +119,9 @@ const newLoops = () => {
 newLoops();
 
 FORM_EL.addEventListener('submit', (e) => {
-	console.log(e)
+	e.preventDefault()
+	let miles = e.target.miles.value
+	let gallons = e.target.gallons.value
+	let price = e.target.price.value
+	updateDOM(trackMPGandCost(miles, gallons, price))
 })

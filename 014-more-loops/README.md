@@ -7,3 +7,7 @@
 ## What code do we want to run in the eventListener?
 
 ### We're getting our user input, so we want to call the functions we've set up with that input, process it, and return the output to our lovely user
+
+## Did this make sense?
+
+### Yes, I completely understood it. One note, I think because I used .toFixed(2) for my rounding, I didnt get the NaN error. Not sure though
