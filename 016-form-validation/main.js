@@ -11,6 +11,7 @@ const MY_TRIP_COST = [];
 
 const FORM_EL = document.getElementById('form-input')
 const ERR = document.getElementById('err')
+const AVG_OUT = document.getElementById('avg-output')
 
 const trackMPGandCost = (miles, gallons, price = 3.79) => {
 	const MPG = miles / gallons;
@@ -61,8 +62,7 @@ const calculateAvg = () => {
 	let avgMPG = sumMPG / MY_MPG.length;
 	let avgTripCost = sumTripCost / MY_TRIP_COST.length;
 
-	updateDOM(`Average MPG is ${avgMPG.toFixed(2)}`);
-	updateDOM(`Average Trip Cost is $${avgTripCost.toFixed(2)}`);
+	return `<h2>Average MPG is ${avgMPG.toFixed(2)}</h2><br><h2>Average Trip Cost is $${avgTripCost.toFixed(2)}</h2>`;
 };
 
 // updateDOM(trackMPGandCost(300, 10, 5.4));
@@ -134,13 +134,14 @@ FORM_EL.addEventListener('submit', (e) => {
 	}
 	
 	if(errMsg.length > 0) {
-		ERR.textContent = errMsg
-	}
-	else {
+		ERR.textContent = errMsg 
+	} else {
+		ERR.textContent = '' // Clear the error message
 		updateDOM(trackMPGandCost(miles, gallons, price))
 	}
+
+	AVG_OUT.innerHTML = calculateAvg() //Output avg outside of form
 	
 })
 
-// Clear the error message
-//Output avg outside of form
+
