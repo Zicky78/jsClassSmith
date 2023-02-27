@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<h1>Acceleration Calculator</h1>
+		<form id="form-input">
+			<div>
+				<lables>Initial Velocity: <input id="initialV" name="initialV" type="text" required/></lables>
+			</div>
+			<div>
+				<lables
+					>Final Velocity: <input id="finalV" name="finalV" type="text" required
+				/></lables>
+			</div>
+            <br>
+			<div>
+				<lables>Start Time (seconds): <input id="startTime" name="startTime" type="text"/></lables>
+			</div>
+			<div>
+				<lables>End Time (seconds): <input id="endTime" name="endTime" type="text" required /></lables>
+			</div>
+			<br>
+			<button>Submit</button>
+		</form>
+		<div id="output"></div>
+
+		<script src="./main.js" defer></script>
+	</body>
+</html>
