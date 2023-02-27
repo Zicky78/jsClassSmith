@@ -125,8 +125,12 @@ FORM_EL.addEventListener('submit', (e) => {
 	let miles = parseInt(e.target.miles.value)
 	let gallons = parseInt(e.target.gallons.value)
 	let price = parseInt(e.target.price.value)
-	if(miles === 0 ) {
+	if(miles === 0 || gallons === 0 || price === 0) {
 		errMsg.push('Values must be greater than zero! Try again!')
+	}
+
+	if(price > 1000) {
+		errMsg.push("Back in my day, gas was only $7 / gallon. Try again!")
 	}
 	
 	if(errMsg.length > 0) {
@@ -137,3 +141,6 @@ FORM_EL.addEventListener('submit', (e) => {
 	}
 	
 })
+
+// Clear the error message
+//Output avg outside of form
