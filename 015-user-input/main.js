@@ -9,6 +9,8 @@ const updateDOM = (input) => {
 const MY_MPG = [];
 const MY_TRIP_COST = [];
 
+const FORM_EL = document.getElementById('form-input')
+
 const trackMPGandCost = (miles, gallons, price = 3.79) => {
 	const MPG = miles / gallons;
 	const tripCost = gallons * price;
@@ -62,18 +64,18 @@ const calculateAvg = () => {
 	updateDOM(`Average Trip Cost is $${avgTripCost.toFixed(2)}`);
 };
 
-updateDOM(trackMPGandCost(300, 10, 5.4));
-updateDOM(trackMPGandCost(320, 20, 3.2));
-updateDOM(trackMPGandCost(100, 7, 4.4));
-updateDOM(trackMPGandCost(600, 24, 5.7));
-updateDOM(trackMPGandCost(50, 2, 3.4));
-updateDOM(trackMPGandCost(320, 20, 3.2));
-updateDOM(trackMPGandCost(320, 12, 5.0));
+// updateDOM(trackMPGandCost(300, 10, 5.4));
+// updateDOM(trackMPGandCost(320, 20, 3.2));
+// updateDOM(trackMPGandCost(100, 7, 4.4));
+// updateDOM(trackMPGandCost(600, 24, 5.7));
+// updateDOM(trackMPGandCost(50, 2, 3.4));
+// updateDOM(trackMPGandCost(320, 20, 3.2));
+// updateDOM(trackMPGandCost(320, 12, 5.0));
 
-calculateAvgMPG();
-calculateAvgCost();
+// calculateAvgMPG();
+// calculateAvgCost();
 
-calculateAvg();
+// calculateAvg();
 
 const newLoops = () => {
 	// Do...while is good for things you want to happen, but want to restart if the result isn't right
@@ -115,3 +117,7 @@ const newLoops = () => {
 };
 
 newLoops();
+
+FORM_EL.addEventListener('submit', (e) => {
+	console.log(e)
+})
