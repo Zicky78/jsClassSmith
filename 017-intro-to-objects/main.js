@@ -15,7 +15,7 @@ const myObj = {
         OS: 'Android'
     },
     myGreeting: function(person) {
-        return 'Whats up, ${person}?'
+        return `${this.name}, who plays too many ${this.hobbies[2]} says: "Whats up, ${person}?"`
     }
 }
 
