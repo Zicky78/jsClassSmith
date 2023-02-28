@@ -21,3 +21,25 @@ const myObj = {
 
 const greeting = myObj.myGreeting('Bobby')
 console.log(greeting)
+
+const student = {
+    name: 'Bob',
+    studentId: '123-4567',
+    testScores: [],
+    academicProbation: false,
+    addTestScore: function (testScore) {
+        this.testScores.push(testScore)
+    },
+    calculateGrade: function() {
+        let grade = 0
+        this.testScores.forEach(test => {
+            grade += test
+        })
+        return grade / this.testScores.length
+    }
+}
+
+student.addTestScore(79)
+student.addTestScore(84)
+student.addTestScore(91)
+console.log(student.calculateGrade().toFixed(2))
