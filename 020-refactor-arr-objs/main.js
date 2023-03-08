@@ -1,4 +1,4 @@
-const updateDOM = (input, id) => {
+function updateDOM(input, id){
 	const divEL = document.getElementById(id);
 	const h3 = document.createElement('h3');
 	h3.textContent = input;
@@ -14,16 +14,29 @@ function calcAvg() {
 	updateDOM(`Average MPG: ${avgMPG.toFixed(2)} | Average Trip Cost: $${avgTripCost.toFixed(2)}`, 'avg-output')
 }
 
+function validateForm(miles, gallons, price) {
+	document.getElementById('err').innerHTML = ''
+	const errMsg = []
+	if(miles <= 0 || gallons <= 0 || price <= 0) {
+		errMsg.push('Please enter a value greater than 0. ')
+	}
+	if(price > 1000) {
+		errMsg.push(`Paying more than $1000/gal for gas is the real error here. Just bike at that point.`)
+	}
+	if(errMsg.length > 0) {
+		updateDOM(errMsg, 'err')
+	} else {
+		return true 
+	}
+}
+
 FORM_EL.addEventListener('submit', (e) => {
 	e.preventDefault()
-	document.getElementById('err').innerHTML = ''
-	if (e.target.miles.value == 0 || e.target.gallons.value == 0 || e.target.price.value == 0) {
-		updateDOM('Enter a value greater than 0', 'err')
-	}
-	else {
-		let miles = e.target.miles.value
-		let gallons = e.target.gallons.value
-		let price = e.target.price.value
+	let miles = e.target.miles.value
+	let gallons = e.target.gallons.value
+	let price = e.target.price.value
+	const isValid = validateForm(miles, gallons, price)
+	if(isValid) {
 		MY_DATA.push(
 			{
 				miles: miles,
@@ -37,33 +50,3 @@ FORM_EL.addEventListener('submit', (e) => {
 			calcAvg()
 	}
 })
-
-// Documentation / Explanation:
-
-// 39 LINES!!! One fewer than last time!
-
-// I thought it would be easier to refactor my previous refactor, since there 
-// was a lot less to do for it. Hope that's okay
-
-// My output statement grows ever-longer though...
-// Once the data is pushed into the array, I use MY_DATA[MY_DATA.length - 1] to access the newly created object
-
-// I ran into some problems when using reduce on an array of objects. Apparently it's
-// best practice to provide an initial value, because the accumulator began as a number literal,
-// which didn't contain the properties MPG and tripCost. Setting an initial value for it lets
-// the accumulator keep the properties of the object that I'm using it with.
-// At least that's the understanding I got after reading through like 6 different posts on stack overflow...
-
-// I was also hoping this would work and save me 3 lines storing them as variables:
-
-/* MY_DATA.push(
-	{
-		miles: e.target.miles.value,
-		gallons: e.target.gallons.value,
-		price: e.target.price.value,
-		MPG: this.miles/this.gallons,
-		tripCost: this.gallons*this.price,
-	}) */
-
-// Overall I think this is my favorite implementation of this program so far
-
