@@ -17,3 +17,9 @@ We could loop over MY_DATA with a forEach to create the table rows, and then run
 ## How do we fix the data lining up with the table?
 
 Thankfully my code was already set up in the correct order, but we can just reorder the key/values in the object
+
+## Separating the render and populate functions
+
+I made a new function populateTableData, and grabbed the previously made table with a querySelector
+I spent a good while thinking about how I could not re-render the whole table each time, but I couldn't
+figure it out without refactoring quite a bit. Since we loop through all the data to create our nodes, they get appended multiple times. Clearing just the table's innerHTML also gets rid of the headings, so I also thought about getting a list of all child elements of the table and deleting all but the first, but I figured I'd just move on and see how you did it. 

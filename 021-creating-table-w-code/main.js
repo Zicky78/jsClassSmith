@@ -42,6 +42,10 @@ function renderTable() {
 	})
 	tbl.appendChild(tr)
 	TBL_OUTPUT.appendChild(tbl)
+}
+
+function populateTableData() {
+	let tbl = document.querySelector('table')
 	MY_DATA.forEach((entry) => {
 		let tr = document.createElement('tr')
 		for(key in entry) {
@@ -70,7 +74,9 @@ FORM_EL.addEventListener('submit', (e) => {
 			})
 			updateDOM(`#${MY_DATA.length} - MPG: ${MY_DATA[MY_DATA.length - 1].MPG.toFixed(2)} | Trip Cost: $${MY_DATA[MY_DATA.length - 1].tripCost.toFixed(2)}`, 'output')
 			document.getElementById('avg-output').innerHTML = ''
+			TBL_OUTPUT.innerHTML = ''
 			renderTable()
+			populateTableData()
 			calcAvg()
 	}
 })
