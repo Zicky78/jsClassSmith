@@ -14,3 +14,6 @@ After we get our data and do our calculations, near where we are calling the oth
 
 We could loop over MY_DATA with a forEach to create the table rows, and then run a for in on each of those objects to create our table data
 
+## How do we fix the data lining up with the table?
+
+Thankfully my code was already set up in the correct order, but we can just reorder the key/values in the object

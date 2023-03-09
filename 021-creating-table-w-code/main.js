@@ -42,7 +42,15 @@ function renderTable() {
 	})
 	tbl.appendChild(tr)
 	TBL_OUTPUT.appendChild(tbl)
-	console.log(tr)
+	MY_DATA.forEach((entry) => {
+		let tr = document.createElement('tr')
+		for(key in entry) {
+			let td = document.createElement('td')
+			td.textContent = entry[key]
+			tr.appendChild(td)
+		}
+		tbl.appendChild(tr)
+	})
 }
 
 FORM_EL.addEventListener('submit', (e) => {
