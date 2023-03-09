@@ -7,6 +7,7 @@ function updateDOM(input, id){
 
 const MY_DATA = []
 const FORM_EL = document.getElementById('form-input')
+const TBL_OUTPUT = document.getElementById('table-out')
 
 function calcAvg() {
 	let avgMPG = MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.MPG, 0) / MY_DATA.length
@@ -30,6 +31,20 @@ function validateForm(miles, gallons, price) {
 	}
 }
 
+function renderTable() {
+	const tbl = document.createElement('table')
+	const headings = ['Miles Driven', 'Gallons Used', 'Price Paid', 'Trip MPG', 'Trip Cost', 'Edit/Delete']
+	const tr = document.createElement('tr')
+	headings.forEach((heading) => {
+		let th = document.createElement('th')
+		th.textContent = heading
+		tr.appendChild(th)
+	})
+	tbl.appendChild(tr)
+	TBL_OUTPUT.appendChild(tbl)
+	console.log(tr)
+}
+
 FORM_EL.addEventListener('submit', (e) => {
 	e.preventDefault()
 	let miles = e.target.miles.value
@@ -47,6 +62,7 @@ FORM_EL.addEventListener('submit', (e) => {
 			})
 			updateDOM(`#${MY_DATA.length} - MPG: ${MY_DATA[MY_DATA.length - 1].MPG.toFixed(2)} | Trip Cost: $${MY_DATA[MY_DATA.length - 1].tripCost.toFixed(2)}`, 'output')
 			document.getElementById('avg-output').innerHTML = ''
+			renderTable()
 			calcAvg()
 	}
 })
