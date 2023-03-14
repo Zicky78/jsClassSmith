@@ -32,7 +32,16 @@ function validateForm(miles, gallons, price) {
 	}
 }
 
-
+function renderEditDelBtn() {
+	const td = document.createElement('td')
+	const editBtn = document.createElement('button')
+	editBtn.textContent = 'Edit'
+	const delBtn = document.createElement('button')
+	delBtn.textContent = 'Delete'
+	td.appendChild(editBtn)
+	td.appendChild(delBtn)
+	return td
+}
 
 function renderTable() {
 	TBL_OUTPUT.innerHTML = ''
@@ -57,13 +66,7 @@ function populateTableData() {
 			td.textContent = entry[key]
 			tr.appendChild(td)
 		}
-		const btnTD = document.createElement('td')
-		const editBtn = document.createElement('button')
-		editBtn.textContent = 'Edit'
-		const delBtn = document.createElement('button')
-		delBtn.textContent = 'Delete'
-		btnTD.appendChild(editBtn)
-		btnTD.appendChild(delBtn)
+		const btnTD = renderEditDelBtn()
 		tr.appendChild(btnTD)
 		tbl.appendChild(tr)
 	})
