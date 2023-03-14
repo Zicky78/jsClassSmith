@@ -44,6 +44,13 @@ function renderEditDelBtn(index) {
 		FORM_EL[0].value = MY_DATA[index].miles
 		FORM_EL[1].value = MY_DATA[index].gallons
 		FORM_EL[2].value = MY_DATA[index].price
+		MY_DATA.splice(index, 1)
+	})
+	delBtn.addEventListener('click', (e) => {
+		MY_DATA.splice(index, 1)
+		renderTable()
+		populateTableData()
+		calcAvg()
 	})
 	td.appendChild(editBtn)
 	td.appendChild(delBtn)
@@ -94,7 +101,7 @@ FORM_EL.addEventListener('submit', (e) => {
 				MPG: miles/gallons,
 				tripCost: gallons*price,
 			})
-			updateDOM(`#${MY_DATA.length} - MPG: ${MY_DATA[MY_DATA.length - 1].MPG.toFixed(2)} | Trip Cost: $${MY_DATA[MY_DATA.length - 1].tripCost.toFixed(2)}`, 'output')
+			//updateDOM(`#${MY_DATA.length} - MPG: ${MY_DATA[MY_DATA.length - 1].MPG.toFixed(2)} | Trip Cost: $${MY_DATA[MY_DATA.length - 1].tripCost.toFixed(2)}`, 'output')
 			renderTable()
 			populateTableData()
 			calcAvg()
