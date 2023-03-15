@@ -11,9 +11,12 @@ const TBL_OUTPUT = document.getElementById('table-out')
 
 function calcAvg() {
 	document.getElementById('avg-output').innerHTML = ''
-	let avgMPG = MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.MPG, 0) / MY_DATA.length
-	let avgTripCost = MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.tripCost, 0) / MY_DATA.length
-	updateDOM(`Average MPG: ${avgMPG.toFixed(2)} | Average Trip Cost: $${avgTripCost.toFixed(2)}`, 'avg-output')
+	if(MY_DATA.length !== 0) {
+		let avgMPG = MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.MPG, 0) / MY_DATA.length
+		let avgTripCost = MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.tripCost, 0) / MY_DATA.length
+		updateDOM(`Average MPG: ${avgMPG.toFixed(2)} | Average Trip Cost: $${avgTripCost.toFixed(2)}`, 'avg-output')
+	}
+	
 }
 
 function validateForm(miles, gallons, price) {
@@ -38,8 +41,6 @@ function renderEditDelBtn(index) {
 	editBtn.textContent = 'Edit'
 	const delBtn = document.createElement('button')
 	delBtn.textContent = 'Delete'
-	// Add event listener
-	// For edit: reference the object in the array for the current row in the table and populate the form input fields
 	editBtn.addEventListener('click', (e) => {
 		FORM_EL[0].value = MY_DATA[index].miles
 		FORM_EL[1].value = MY_DATA[index].gallons
@@ -49,7 +50,6 @@ function renderEditDelBtn(index) {
 	delBtn.addEventListener('click', (e) => {
 		MY_DATA.splice(index, 1)
 		renderTable()
-		populateTableData()
 		calcAvg()
 	})
 	td.appendChild(editBtn)
@@ -59,16 +59,20 @@ function renderEditDelBtn(index) {
 
 function renderTable() {
 	TBL_OUTPUT.innerHTML = ''
-	const tbl = document.createElement('table')
-	const headings = ['Miles Driven', 'Gallons Used', 'Price Paid', 'Trip MPG', 'Trip Cost', 'Edit/Delete']
-	const tr = document.createElement('tr')
-	headings.forEach((heading) => {
-		let th = document.createElement('th')
-		th.textContent = heading
-		tr.appendChild(th)
-	})
-	tbl.appendChild(tr)
-	TBL_OUTPUT.appendChild(tbl)
+	if(MY_DATA.length !== 0) {
+		const tbl = document.createElement('table')
+		const headings = ['Miles Driven', 'Gallons Used', 'Price Paid', 'Trip MPG', 'Trip Cost', 'Edit/Delete']
+		const tr = document.createElement('tr')
+		headings.forEach((heading) => {
+			let th = document.createElement('th')
+			th.textContent = heading
+			tr.appendChild(th)
+		})
+		tbl.appendChild(tr)
+		TBL_OUTPUT.appendChild(tbl)
+		populateTableData()
+	}
+	
 }
 
 function populateTableData() {
@@ -101,9 +105,7 @@ FORM_EL.addEventListener('submit', (e) => {
 				MPG: miles/gallons,
 				tripCost: gallons*price,
 			})
-			//updateDOM(`#${MY_DATA.length} - MPG: ${MY_DATA[MY_DATA.length - 1].MPG.toFixed(2)} | Trip Cost: $${MY_DATA[MY_DATA.length - 1].tripCost.toFixed(2)}`, 'output')
 			renderTable()
-			populateTableData()
 			calcAvg()
 	}
 })
