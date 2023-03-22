@@ -7,10 +7,10 @@ function updateDOM(input, id) {
 }
 
 // Inputs
-let dayOfWeek = 4; // 1 = Monday, 7 = Sunday
-let cheatDay = false;
-let rememberedLunch = true;
-let tired = true;
+const dayOfWeek = 4; // 1 = Monday, 7 = Sunday
+const cheatDay = false;
+const rememberedLunch = true;
+const tired = true;
 
 // Conditions
 let makingDinner = dayOfWeek > 4;
@@ -30,40 +30,37 @@ updateDOM(`Am I working today?: ${working}`, "output");
 // Decision Logic
 
 // Working means less time to cook breakfast
+// Working also means that I really only get a chance to eat a small snack during lunch
+// Doesn't bother me though, since I usually only eat something small or forget to eat lunch entirely
 if (working) {
 	updateDOM(
 		`Breakfast: Not as much time. Yogurt, Fruit, and Walnuts!`,
 		"output"
 	);
-	calories += 102 + 35 + 185;
+	updateDOM(
+		`Lunch: Working hard or hardly working? Have some pistachios or a weight-loss snack bar on your break.`,
+		"output"
+	);
+	calories += 102 + 35 + 185 + 95;
 } else {
 	updateDOM(
 		`Breakfast: Low-Carb Toast, Scrambled Eggs with Cheese, and Bacon. Though I don't know if it's still "breakfast" past noon`,
 		"output"
 	);
 	calories += 5 + 215 + 164;
-}
-
-// Working also means that I really only get a chance to eat a small snack during lunch
-// Doesn't bother me though, since I usually only eat something small or forget to eat lunch entirely
-if (working) {
-	updateDOM(
-		`Lunch: Working hard or hardly working? Have some pistachios or a weight-loss snack bar on your break.`,
-		"output"
-	);
-	calories += 95;
-} else if (rememberedLunch) {
-	updateDOM(
-		`Lunch: Leftovers from the fridge, a quick sandwich, or a salad`,
-		"output"
-	);
-	calories += Math.random() * (300 - 150) + 150;
-} else {
-	updateDOM(
-		`Lunch?: Oh hey it's 4pm and you're now hungry but it's too late to make lunch and too early to make dinner`,
-		"output"
-	);
-	calories += 0;
+	if (rememberedLunch) {
+		updateDOM(
+			`Lunch: Leftovers from the fridge, a quick sandwich, or a salad`,
+			"output"
+		);
+		calories += Math.random() * (300 - 150) + 150;
+	} else {
+		updateDOM(
+			`Lunch?: Oh hey it's 4pm and you're now hungry but it's too late to make lunch and too early to make dinner`,
+			"output"
+		);
+		calories += 0;
+	}
 }
 
 // If it's a cheat day, logic needn't apply (in code and out). I'm getting whatever I'm craving at the time. Right now being
