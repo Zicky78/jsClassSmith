@@ -17,9 +17,13 @@ function getTripData() {
 	}
 }
 
+function saveTripData() {
+	localStorage.setItem("tripdata", JSON.stringify(MY_DATA));
+}
+
 const MY_DATA = getTripData();
 
-// Also adding this so that the average is displayed if theres data in MY_DATA from localStorage
+
 if (MY_DATA != []) {
 	renderTable();
 	calcAvg();
@@ -74,6 +78,7 @@ function renderEditDelBtn(index) {
 	});
 	delBtn.addEventListener("click", (e) => {
 		MY_DATA.splice(index, 1);
+		saveTripData();
 		renderTable();
 		calcAvg();
 	});
@@ -137,6 +142,6 @@ FORM_EL.addEventListener("submit", (e) => {
 		});
 		renderTable();
 		calcAvg();
-		localStorage.setItem("tripdata", JSON.stringify(MY_DATA));
+		saveTripData();
 	}
 });
