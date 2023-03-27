@@ -1,3 +1,5 @@
+import { saveTripData } from "./storage.js";
+
 const TBL_OUTPUT = document.getElementById("table-out");
 const FORM_EL = document.getElementById("form-input");
 
@@ -15,9 +17,9 @@ function renderEditDelBtn(MY_DATA, index) {
 	});
 	delBtn.addEventListener("click", (e) => {
 		MY_DATA.splice(index, 1);
-		saveTripData();
-		renderTable();
-		calcAvg();
+		saveTripData(MY_DATA);
+		renderTable(MY_DATA);
+		//calcAvg(); commenting out till fix
 	});
 	td.appendChild(editBtn);
 	td.appendChild(delBtn);

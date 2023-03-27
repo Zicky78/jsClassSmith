@@ -1,4 +1,5 @@
 import { renderTable } from "./render.js";
+import { saveTripData, getTripData } from "./storage.js";
 
 function updateDOM(input, id) {
 	const divEL = document.getElementById(id);
@@ -8,19 +9,6 @@ function updateDOM(input, id) {
 }
 
 const FORM_EL = document.getElementById("form-input");
-
-function getTripData() {
-	const tripDataJSON = localStorage.getItem("tripdata");
-	if (tripDataJSON != null) {
-		return JSON.parse(tripDataJSON);
-	} else {
-		return [];
-	}
-}
-
-function saveTripData() {
-	localStorage.setItem("tripdata", JSON.stringify(MY_DATA));
-}
 
 const MY_DATA = getTripData();
 
@@ -80,6 +68,7 @@ FORM_EL.addEventListener("submit", (e) => {
 		});
 		renderTable(MY_DATA);
 		calcAvg();
-		saveTripData();
+		saveTripData(MY_DATA);
+		FORM_EL.reset()
 	}
 });
