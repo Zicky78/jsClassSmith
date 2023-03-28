@@ -1,4 +1,6 @@
-function saveTripData(MY_DATA) {
+import { MY_DATA } from "./data.js";
+
+function saveTripData() {
 	localStorage.setItem("tripdata", JSON.stringify(MY_DATA));
 }
 
@@ -11,4 +13,4 @@ function getTripData() {
 	}
 }
 
-export {saveTripData, getTripData}
+export { saveTripData, getTripData };

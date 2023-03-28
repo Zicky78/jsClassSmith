@@ -1,9 +1,17 @@
 import { saveTripData } from "./storage.js";
+import { MY_DATA, calcAvg } from "./data.js";
 
-const TBL_OUTPUT = document.getElementById("table-out");
 const FORM_EL = document.getElementById("form-input");
+const TBL_OUTPUT = document.getElementById("table-out");
 
-function renderEditDelBtn(MY_DATA, index) {
+function updateDOM(input, id) {
+	const divEL = document.getElementById(id);
+	const h3 = document.createElement("h3");
+	h3.textContent = input;
+	divEL.appendChild(h3);
+}
+
+function renderEditDelBtn(index) {
 	const td = document.createElement("td");
 	const editBtn = document.createElement("button");
 	editBtn.textContent = "Edit";
@@ -17,16 +25,27 @@ function renderEditDelBtn(MY_DATA, index) {
 	});
 	delBtn.addEventListener("click", (e) => {
 		MY_DATA.splice(index, 1);
-		saveTripData(MY_DATA);
-		renderTable(MY_DATA);
-		//calcAvg(); commenting out till fix
+		saveTripData();
+		renderTable();
+		calcAvg();
 	});
 	td.appendChild(editBtn);
 	td.appendChild(delBtn);
 	return td;
 }
 
-function renderTable(MY_DATA) {
+function renderTable() {
+    // I had to move the TBL_OUTPUT declaration here because it was giving me an error.
+    // I added that condition block to render the table and calculate the average if there was
+    // anything in localStorage, which was throwing an error that it couldn't access TBL_OUTPUT.
+    // I'm a bit unclear why it wasn't being read properly when
+    // it was declared up by FORM_EL. Since renderTable calls populateTableData() which calls
+    // renderEditDelBtn() which uses FORM_EL, wouldn't it also throw an error? Maybe I'll figure it out
+    // in the solution video if you encountered the same error
+
+    // EDIT: Nope, just spent 20 mins learning about module execution order and post order traversal, and all I had to do was just import
+    // data.js first in main.js instead of importing render.js first
+    
 	TBL_OUTPUT.innerHTML = "";
 	if (MY_DATA.length !== 0) {
 		const tbl = document.createElement("table");
@@ -46,11 +65,11 @@ function renderTable(MY_DATA) {
 		});
 		tbl.appendChild(tr);
 		TBL_OUTPUT.appendChild(tbl);
-		populateTableData(MY_DATA);
+		populateTableData();
 	}
 }
 
-function populateTableData(MY_DATA) {
+function populateTableData() {
 	let tbl = document.querySelector("table");
 	MY_DATA.forEach((entry, index) => {
 		let tr = document.createElement("tr");
@@ -59,10 +78,10 @@ function populateTableData(MY_DATA) {
 			td.textContent = entry[key];
 			tr.appendChild(td);
 		}
-		const btnTD = renderEditDelBtn(MY_DATA, index);
+		const btnTD = renderEditDelBtn(index);
 		tr.appendChild(btnTD);
 		tbl.appendChild(tr);
 	});
 }
 
-export {renderTable}
+export {renderTable, updateDOM}

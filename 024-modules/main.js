@@ -1,38 +1,8 @@
-import { renderTable } from "./render.js";
-import { saveTripData, getTripData } from "./storage.js";
-
-function updateDOM(input, id) {
-	const divEL = document.getElementById(id);
-	const h3 = document.createElement("h3");
-	h3.textContent = input;
-	divEL.appendChild(h3);
-}
+import { MY_DATA, calcAvg } from "./data.js";
+import { renderTable, updateDOM } from "./render.js";
+import { saveTripData } from "./storage.js";
 
 const FORM_EL = document.getElementById("form-input");
-
-const MY_DATA = getTripData();
-
-if (MY_DATA != []) {
-	renderTable(MY_DATA);
-	calcAvg();
-}
-
-function calcAvg() {
-	document.getElementById("avg-output").innerHTML = "";
-	if (MY_DATA.length !== 0) {
-		let avgMPG =
-			MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.MPG, 0) / MY_DATA.length;
-		let avgTripCost =
-			MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.tripCost, 0) /
-			MY_DATA.length;
-		updateDOM(
-			`Average MPG: ${avgMPG.toFixed(
-				2
-			)} | Average Trip Cost: $${avgTripCost.toFixed(2)}`,
-			"avg-output"
-		);
-	}
-}
 
 function validateForm(miles, gallons, price) {
 	document.getElementById("err").innerHTML = "";
@@ -66,9 +36,9 @@ FORM_EL.addEventListener("submit", (e) => {
 			MPG: miles / gallons,
 			tripCost: gallons * price,
 		});
-		renderTable(MY_DATA);
+		renderTable();
 		calcAvg();
-		saveTripData(MY_DATA);
+		saveTripData();
 		FORM_EL.reset()
 	}
 });
