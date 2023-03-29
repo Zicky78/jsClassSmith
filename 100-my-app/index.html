@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fitness App</title>
+    <title>Byte Balance</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" type="module"></script>
+    <script src="./render.js" type="module"></script>
+    <script src="./log.js" type="module"></script>
 </head>
 <body>
-    <h1></h1>
-    <div id="output"></div>
-    <script src="./main.js" defer></script>
+    <header>
+        <h1 class="centered">Byte Balance</h1>
+        <h2 class="centered">Storing nutrition one bite at a time</h2>
+    </header>
+    <main>
+        <div>
+        <form id="form-input" >
+            <div class="centered">
+                <label>Food: <input id="food" name="food" type="text" ></label>
+                <label>Calories per Serving: <input id="calories" name="calories" type="number"></label>
+                <label># of Servings: <input id="amount" name="amount" type="number"></label>
+                <label>Exercise <input id="exercise" name="exercise" type="checkbox" ></label>
+                <label class="hidden" id="cal-burned-input">Calories Burned: <input id="calBurned" name="calBurned" type="number"></label>
+            </div>
+            <div class="centered">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+    </main>
+    <section>
+        <div id="entry-output"></div>
+    </section>
+    
 </body>
 </html>

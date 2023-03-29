@@ -1,10 +1,16 @@
-## App Idea
+## Week 11
 
-I've been on a big weight-loss journey, so the first thing that came to mind is a calorie counting app.
-Users could create food entries with the name, number of calories, amount, etc. Maybe have the system clock log when the entry
-was inputted and organize them by date, so theres a running log of what was eaten on which day. Also each entry would total that day's
-calories as entries were created. I can also include exercise logging for type of activity, duration, and calories burned, which would subtract from that day's total.
+Now that we're getting input from a user, I did some refactoring (read: started over) to make the app
+more in line with that. 
 
-To start with though, I can go through my own decision making process for exercise and nutrition. Though the exercise part doesn't really require any decision making. I have a routine and I do that routine on the 4 days I don't work, so I won't be including that in this part.
+Outlined at the bottom of main.js are the features planned, but for now I wanted to get the create and display functions built.
+Obviously those needed a few more miscellaneous functions to work properly, and to work with how I wanted to store the data.
 
-I added day of the week and some conditions like am I working or is it a cheat day to figure out what I'm likely to eat on any given day. I looked up online or in my fridge for the calorie info, and then I add that to a running total for that day
+Users can input a food, serving amount, and amount of calories per serving. They can also input exercise as part of the entry, though I think I'll separate those into two separate forms in the next step. 
+
+After user input, the app checks if there is already an entry for the current day, and pushes the data into the existing entry if so. If not, it creates a new entry
+
+Calories for that day are then totalled and displayed along with calories burned
+
+
+
