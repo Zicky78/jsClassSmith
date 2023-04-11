@@ -18,6 +18,7 @@ function renderEditDelBtn(index) {
 	const delBtn = document.createElement("button");
 	delBtn.textContent = "Delete";
 	editBtn.addEventListener("click", (e) => {
+		toggleEditDelete();
 		FORM_EL[0].value = MY_DATA[index].miles;
 		FORM_EL[1].value = MY_DATA[index].gallons;
 		FORM_EL[2].value = MY_DATA[index].price;
@@ -73,4 +74,11 @@ function populateTableData() {
 	});
 }
 
-export {renderTable, updateDOM}
+function toggleEditDelete() {
+	let btns = document.querySelectorAll("td button");
+	btns.forEach((btn) => {
+		btn.disabled = true;
+	});
+}
+
+export { renderTable, updateDOM, toggleEditDelete };
