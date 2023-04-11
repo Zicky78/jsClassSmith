@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link rel="stylesheet" href="./style.css" />
+	<script type="module" src="./main.js"></script>
+	<script type="module" src="./storage.js"></script>
+	<script type="module" src="./render.js"></script>
+	<script type="module" src="./data.js"></script>
+</head>
+
+<body>
+	<div class="centered">
+		<h1>Getting User Input</h1>
+		<div id="err" class="error"></div>
+		<form id="form-input">
+			<div>
+				<label>Miles <input id="miles" name="miles" type="number" step="any" required /></label>
+			</div>
+			<br>
+			<div>
+				<label>Gallons <input id="gallons" name="gallons" type="number" step="any" required /></label>
+			</div>
+			<br>
+			<div>
+				<label>Price <input id="price" name="price" type="number" step="any" required /></label>
+			</div>
+			<br>
+			<button>Submit</button>
+		</form>
+		<div id="output"></div>
+		
+		<div id="table-out">
+
+		</div>
+		<div id="avg-output"></div>
+	</div>
+	
+</body>
+
+</html>
