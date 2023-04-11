@@ -11,6 +11,7 @@ if (MY_DATA != null) {
 function calcAvg() {
 	document.getElementById("avg-output").innerHTML = "";
 	if (MY_DATA.length !== 0) {
+		
 		let avgMPG =
 			MY_DATA.reduce((sum, MY_DATA) => sum + MY_DATA.MPG, 0) / MY_DATA.length;
 		let avgTripCost =

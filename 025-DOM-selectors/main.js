@@ -24,17 +24,17 @@ function validateForm(miles, gallons, price) {
 
 FORM_EL.addEventListener("submit", (e) => {
 	e.preventDefault();
-	let miles = e.target.miles.value;
-	let gallons = e.target.gallons.value;
-	let price = e.target.price.value;
+	let miles = parseFloat(e.target.miles.value);
+	let gallons = parseFloat(e.target.gallons.value);
+	let price = parseFloat(e.target.price.value);
 	const isValid = validateForm(miles, gallons, price);
 	if (isValid) {
 		MY_DATA.push({
 			miles: miles,
 			gallons: gallons,
 			price: price,
-			MPG: (miles / gallons).toFixed(2),
-			tripCost: (gallons * price).toFixed(2),
+			MPG: Number((miles / gallons).toFixed(2)),
+			tripCost: Number((gallons * price).toFixed(2)),
 		});
 		renderTable();
 		calcAvg();
