@@ -1,5 +1,5 @@
 import { MY_DATA, calcAvg } from "./data.js";
-import { renderTable, updateDOM, toggleEditDelete } from "./render.js";
+import { renderTable, updateDOM } from "./render.js";
 import { saveTripData } from "./storage.js";
 
 const FORM_EL = document.getElementById("form-input");
