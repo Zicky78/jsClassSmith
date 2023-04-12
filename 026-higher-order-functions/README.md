@@ -46,3 +46,7 @@ I think I still prefer my solution a bit more in this instance, but for bigger p
 ## My attempt at fixing avg and render avg
 
 No changes since I jumped the gun slightly on the last commit (by two lines) and I had the render issue already fixed
+
+## Solution
+
+n/a
