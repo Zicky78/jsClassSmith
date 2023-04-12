@@ -13,7 +13,16 @@ function validateForm(food, calories, amount, exercise, calBurned) {
 	ERR.textContent = "";
 	// Create an array to store the error messages
 	const errors = [];
+
+	// Check if no food and no exercise were submitted
+	if (!food && !exercise) {
+		errors.push(
+			"Please enter a food entry, exercise, or both before submitting"
+		);
+	}
+
 	// Check to see if a food was entered. If it was, calories and amount are required to be greater than zero
+	// If not, check if calories or amount were entered without food name
 	if (food) {
 		if (calories <= 0 || isNaN(calories)) {
 			errors.push("Tic-Tacs aren't food. Enter calories greater than zero");
@@ -21,6 +30,8 @@ function validateForm(food, calories, amount, exercise, calBurned) {
 		if (amount <= 0 || isNaN(amount)) {
 			errors.push("Please enter a serving size greater than zero");
 		}
+	} else if (calories || amount) {
+		errors.push("Food name required for food entries");
 	}
 
 	// Check to see if exercise was entered. If it was, calories burned is required to be greater than zero
