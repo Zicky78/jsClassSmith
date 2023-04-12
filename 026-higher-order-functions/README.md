@@ -37,4 +37,8 @@ The count variable is maintained separately for each instance of the returned fu
 and counter2 have their own separate counts.
 ```
 
+## Implement Reduce for Sum
 
+While I had this done, I decided to implement your solution as practice since I'm still pretty new to higher order functions. I couldn't figure out why sum was an object, and chatGPT told me that the initial value needs to match the structure of the final value, and not setting an initial value like I did for mine makes sum an object with the same properties as MY_DATA by default.
+
+I think I still prefer my solution a bit more in this instance, but for bigger projects this would be really helpful
