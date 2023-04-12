@@ -42,3 +42,7 @@ and counter2 have their own separate counts.
 While I had this done, I decided to implement your solution as practice since I'm still pretty new to higher order functions. I couldn't figure out why sum was an object, and chatGPT told me that the initial value needs to match the structure of the final value, and not setting an initial value like I did for mine makes sum an object with the same properties as MY_DATA by default.
 
 I think I still prefer my solution a bit more in this instance, but for bigger projects this would be really helpful
+
+## My attempt at fixing avg and render avg
+
+No changes since I jumped the gun slightly on the last commit (by two lines) and I had the render issue already fixed
