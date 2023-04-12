@@ -20,9 +20,9 @@ const calLog = [];
 
 // Constructor to make new entries. this.items becomes an array holding the items object that is passed in
 class entry {
-	constructor(date, items, exercise, calBurned) {
+	constructor(date, item, exercise, calBurned) {
 		this.date = date;
-		this.items = [items];
+		this.items = [item];
 		this.calTotal = 0;
 		this.exercise = exercise;
 		this.calBurned = calBurned;
@@ -38,6 +38,7 @@ function calcTotal() {
 			// Sum the calories of each of the items in the entry
 			entry.calTotal += item.calories * item.amount;
 		});
+		entry.calTotal -= entry.calBurned;
 		console.log(entry.calTotal);
 	});
 }

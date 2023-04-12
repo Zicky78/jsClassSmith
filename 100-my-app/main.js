@@ -1,53 +1,104 @@
 import { calLog, calcTotal, entry, findLog } from "./log.js";
-import { displayLogBook } from "./render.js";
+import {
+	displayLogBook,
+	displayErrors,
+	ERR,
+	calBurnedInput,
+} from "./render.js";
 
 const FORM = document.getElementById("form-input");
+
+function validateForm(food, calories, amount, exercise, calBurned) {
+	// Clear the error messages on the DOM
+	ERR.textContent = "";
+	// Create an array to store the error messages
+	const errors = [];
+	// Check to see if a food was entered. If it was, calories and amount are required to be greater than zero
+	if (food) {
+		if (calories <= 0 || isNaN(calories)) {
+			errors.push("Tic-Tacs aren't food. Enter calories greater than zero");
+		}
+		if (amount <= 0 || isNaN(amount)) {
+			errors.push("Please enter a serving size greater than zero");
+		}
+	}
+
+	// Check to see if exercise was entered. If it was, calories burned is required to be greater than zero
+	if (exercise) {
+		if (calBurned <= 0 || isNaN(calBurned)) {
+			errors.push("Please enter calories burned greater than zero");
+		}
+	}
+
+	// If there are error messages, display the errors. If not, return true
+	if (errors.length > 0) {
+		displayErrors(errors);
+	} else {
+		return true;
+	}
+}
 
 FORM.addEventListener("submit", (e) => {
 	e.preventDefault();
 
-	// Get the current date
-	let date = new Date();
-
-	// Create an object "items" to store a food entry
-	let items = {
-		food: e.target.food.value,
-		calories: parseInt(e.target.calories.value),
-		amount: parseInt(e.target.amount.value),
-	};
-
-	// Get exercise true/false
+	// Grab the values from the form
+	let food = e.target.food.value;
+	let calories = parseInt(e.target.calories.value);
+	let amount = parseInt(e.target.amount.value);
 	let exercise = e.target.exercise.checked;
-
-	// Check if there is already an entry for the current date
-	// Returns a false boolean if false, or the entry object if true
-	let foundEntry = findLog(date);
-
-	if (foundEntry) {
-		// Push items to the items array
-		foundEntry.items.push(items);
-		// Add to calories burned if exercised
-		if (exercise) {
-			foundEntry.calBurned += parseInt(e.target.calBurned.value);
-		}
-		console.log(foundEntry);
-	} else {
-		// Initialize calBurned to 0 in case there's no exercise, and then change it to the targeted value if there is
-		let calBurned = 0;
-		if (exercise) {
-			calBurned = parseInt(e.target.calBurned.value);
-		}
-		// Push a new entry with the created data to the calorie logbook
-		calLog.push(new entry(date, items, exercise, calBurned));
+	let calBurned = 0;
+	if (exercise) {
+		calBurned = parseInt(e.target.calBurned.value);
 	}
-	// Re-calculate the totals
-	calcTotal();
 
-	// Display log book
-	displayLogBook();
+	// Validate the form
+	let isValid = validateForm(food, calories, amount, exercise, calBurned);
 
-	// Reset form
-	FORM.reset();
+	if (isValid) {
+		// Get the current date
+		let date = new Date();
+
+		// Check if there is already an entry for the current date
+		// Returns a false boolean if false, or the entry object if true
+		let foundEntry = findLog(date);
+
+		//Create an object "items" to store a food entry
+		let item = {};
+
+		// If food was entered, update items
+		if (food) {
+			item = {
+				food: food,
+				calories: calories,
+				amount: amount,
+			};
+		}
+
+		//Update found entry if found, or create new entry if not found
+		if (foundEntry) {
+			// Push items to the items array if food was entered
+			if (food) {
+				foundEntry.items.push(item);
+			}
+			// Add to calories burned if exercised
+			if (exercise) {
+				foundEntry.calBurned += calBurned;
+			}
+		} else {
+			// Push a new entry with the created data to the calorie logbook
+			calLog.push(new entry(date, item, exercise, calBurned));
+		}
+
+		// Re-calculate the totals
+		calcTotal();
+
+		// Display log book
+		displayLogBook();
+
+		// Reset form
+		FORM.reset();
+		calBurnedInput.classList.add("hidden");
+	}
 });
 
 // Calorie Counting App

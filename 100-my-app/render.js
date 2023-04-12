@@ -3,6 +3,7 @@ import { calLog, entry } from "./log.js";
 const exerciseCheckBox = document.getElementById("exercise");
 const calBurnedInput = document.getElementById("cal-burned-input");
 const entryOutput = document.getElementById("entry-output");
+const ERR = document.getElementById("err");
 
 // Control if calories burned input is shown based on status of exercise check box
 exerciseCheckBox.addEventListener("change", (e) => {
@@ -49,4 +50,11 @@ function displayLogBook() {
 	});
 }
 
-export { displayLogBook };
+// Display the error messages
+function displayErrors(errors) {
+	let msg = document.createElement("p");
+	msg.textContent = errors;
+	ERR.appendChild(msg);
+}
+
+export { displayLogBook, displayErrors, ERR, calBurnedInput };
