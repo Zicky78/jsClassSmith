@@ -5,6 +5,33 @@ const calBurnedInput = document.getElementById("cal-burned-input");
 const entryOutput = document.getElementById("entry-output");
 const ERR = document.getElementById("err");
 
+// ChatGPT-generated modal code
+const modalContainer = document.getElementById('modal-container');
+const closeBtn = document.getElementById('close-modal-btn');
+const backdrop = document.getElementById('backdrop');
+const openBtn = document.getElementById('open-modal-btn');
+
+// Open the modal
+function openModal() {
+  modalContainer.style.display = 'block';
+  backdrop.style.display = 'block';
+}
+
+// Close the modal
+function closeModal() {
+  modalContainer.style.display = 'none';
+  backdrop.style.display = 'none';
+}
+
+// Open the modal when clicking the open button
+openBtn.addEventListener('click', openModal);
+
+// Close the modal when clicking the close button
+closeBtn.addEventListener('click', closeModal);
+
+// Close the modal when clicking outside the modal content
+backdrop.addEventListener('click', closeModal);
+
 // Control if calories burned input is shown based on status of exercise check box
 exerciseCheckBox.addEventListener("change", (e) => {
 	if (exerciseCheckBox.checked) {
@@ -40,13 +67,19 @@ function displayLogBook() {
 			entryOutput.appendChild(itemOutput);
 		});
 
+		let totalOutputs = document.createElement("div");
+		totalOutputs.classList.add("total-outputs");
+
 		let exerciseOutput = document.createElement("h3");
 		exerciseOutput.textContent = `Exercise: ${entry.calBurned} calories burned!`;
 		entryOutput.appendChild(exerciseOutput);
 
 		let calTotalOutput = document.createElement("h3");
 		calTotalOutput.textContent = `Total Calories Today: ${entry.calTotal}`;
-		entryOutput.appendChild(calTotalOutput);
+
+		totalOutputs.appendChild(exerciseOutput);
+		totalOutputs.appendChild(calTotalOutput);
+		entryOutput.appendChild(totalOutputs);
 	});
 }
 
@@ -56,5 +89,7 @@ function displayErrors(errors) {
 	msg.textContent = errors;
 	ERR.appendChild(msg);
 }
+
+
 
 export { displayLogBook, displayErrors, ERR, calBurnedInput };

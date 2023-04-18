@@ -1,0 +1,64 @@
+:root {
+	--color-dark: #2d3142;
+	--color-light: #ffffff;
+	--color-neutral: #bfc0c0;
+	--color-main: #e63462;
+	--color-accent: #f292ac;
+	font-family: "Sansation", sans-serif;
+}
+
+#modal-container {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#backdrop {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+#modal-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	background-color: var(--color-dark);
+	padding: 20px;
+	border-radius: 2px;
+}
+
+#open-modal-btn {
+	background-color: var(--color-main);
+	color: var(--color-light);
+	border: none;
+	padding: 10px 20px;
+	border-radius: 2px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#close-modal-btn {
+	background-color: var(--color-light);
+	color: var(--color-dark);
+	border: none;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 2px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#modal-content p {
+	color: var(--color-light);
+}

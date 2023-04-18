@@ -1,40 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Byte Balance</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./main.js" type="module"></script>
-    <script src="./render.js" type="module"></script>
-    <script src="./log.js" type="module"></script>
-</head>
-<body>
-    <header>
-        <h1 class="centered">Byte Balance</h1>
-        <h2 class="centered">Storing nutrition one bite at a time</h2>
-    </header>
-    <main>
-        <div>
-        <form id="form-input" >
-            <div id="err"></div>
-            <div class="centered">
-                <label>Food: <input id="food" name="food" type="text" ></label>
-                <label>Calories per Serving: <input id="calories" name="calories" type="number"></label>
-                <label># of Servings: <input id="amount" name="amount" type="number"></label>
-                <label>Exercise <input id="exercise" name="exercise" type="checkbox" ></label>
-                <label class="hidden" id="cal-burned-input">Calories Burned: <input id="calBurned" name="calBurned" type="number"></label>
-            </div>
-            <div class="centered">
-                <button>Submit</button>
-            </div>
-        </form>
-    </div>
-    </main>
-    <section>
-        <div id="entry-output"></div>
-    </section>
-    
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Byte Balance</title>
+		<link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" href="./modal.css" />
+		<link rel="stylesheet" href="./form.css" />
+		<link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet" />
+
+		<script src="./main.js" type="module"></script>
+		<script src="./render.js" type="module"></script>
+		<script src="./log.js" type="module"></script>
+	</head>
+	<body>
+		<!-- Header with Title and Slogan -->
+		<header>
+			<h1 class="centered">Byte Balance</h1>
+			<h2 class="centered">Storing nutrition one bite at a time</h2>
+		</header>
+
+		<!-- Main Output -->
+		<main>
+			<div>
+				<div id="entry-output" class="width-70"></div>
+				<div class="justify-right width-65">
+					<button id="open-modal-btn">Add +</button>
+				</div>
+			</div>
+		</main>
+
+		<!-- Modal -->
+		<section>
+			<div id="modal-container">
+				<div id="modal-content">
+					<form id="form-input">
+						<div id="err"></div>
+						<div class="centered">
+							<label>Food: <input id="food" name="food" type="text" /></label>
+
+							<label
+								>Calories per Serving:
+								<input id="calories" name="calories" type="number"
+							/></label>
+							<label
+								># of Servings: <input id="amount" name="amount" type="number"
+							/></label>
+
+							<label
+								>Exercise <input id="exercise" name="exercise" type="checkbox"
+							/></label>
+							<label class="hidden" id="cal-burned-input"
+								>Calories Burned:
+								<input id="calBurned" name="calBurned" type="number"
+							/></label>
+						</div>
+						<div class="centered">
+							<button id="close-modal-btn" type="button">Cancel</button>
+							<button id="submit-btn">Submit</button>
+						</div>
+					</form>
+				</div>
+				<div id="backdrop"></div>
+			</div>
+		</section>
+	</body>
 </html>
