@@ -10,7 +10,17 @@ class Person {
     }
 }
 
-const zach = new Person('Zach', 'Smith', '123 Main St.');
+class Student extends Person {
+    constructor(firstName, lastName, address, classList) {
+        super(firstName, lastName, address);
+        this.classList = classList;
+    }
+    showStatus() {
+        console.log(`${this.firstName} is taking these classes: ${this.classList}`);
+    }
+}
+
+const zach = new Student('Zach', 'Smith', '123 Main St.', ["CIT 93", "CIT 28", "AFRAM 1"]);
 
 zach.showStatus();
 
