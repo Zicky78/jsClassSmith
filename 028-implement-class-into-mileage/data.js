@@ -6,11 +6,26 @@ const MY_DATA = getTripData();
 // New class
 class TripData {
 	constructor(miles, gallons, price) {
-		this.miles = miles
-		this.gallons = gallons
-		this.price = price
-		this.MPG = Number((miles / gallons).toFixed(2))
-		this.tripCost = Number((gallons * price).toFixed(2))
+		this._miles = miles;
+		this._gallons = gallons;
+		this._price = price;
+		this._MPG = Number((miles / gallons).toFixed(2));
+		this._tripCost = Number((gallons * price).toFixed(2));
+	}
+	getMiles() {
+		return this._miles;
+	}
+	getGallons() {
+		return this._gallons;
+	}
+	getPrice() {
+		return this._price;
+	}
+	getMPG() {
+		return this._MPG;
+	}
+	getTripCost() {
+		return this._tripCost;
 	}
 }
 
@@ -22,14 +37,14 @@ if (MY_DATA != null) {
 function calcAvg() {
 	document.getElementById("avg-output").innerHTML = "";
 	if (MY_DATA.length !== 0) {
-		let sums = MY_DATA.reduce(function(sum, obj) {
+		let sums = MY_DATA.reduce(function (sum, obj) {
 			return {
-				MPG: sum.MPG + obj.MPG,
-				tripCost: sum.tripCost + obj.tripCost
-			}
-		})
-		let avgMPG = sums.MPG / MY_DATA.length
-		let avgTripCost = sums.tripCost / MY_DATA.length
+				_MPG: sum._MPG + obj.getMPG(),
+				_tripCost: sum._tripCost + obj.getTripCost(),
+			};
+		});
+		let avgMPG = sums._MPG / MY_DATA.length;
+		let avgTripCost = sums._tripCost / MY_DATA.length;
 		updateDOM(
 			`Average MPG: ${avgMPG.toFixed(
 				2

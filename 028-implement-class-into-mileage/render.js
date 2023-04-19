@@ -1,5 +1,5 @@
 import { saveTripData } from "./storage.js";
-import { MY_DATA, calcAvg } from "./data.js";
+import { MY_DATA, calcAvg, TripData } from "./data.js";
 
 const FORM_EL = document.getElementById("form-input");
 const TBL_OUTPUT = document.getElementById("table-out");
@@ -22,9 +22,9 @@ function renderEditDelBtn(index) {
 		btns.forEach((btn) => {
 			btn.disabled = true;
 		});
-		FORM_EL[0].value = MY_DATA[index].miles;
-		FORM_EL[1].value = MY_DATA[index].gallons;
-		FORM_EL[2].value = MY_DATA[index].price;
+		FORM_EL[0].value = MY_DATA[index].getMiles();
+		FORM_EL[1].value = MY_DATA[index].getGallons();
+		FORM_EL[2].value = MY_DATA[index].getPrice();
 		MY_DATA.splice(index, 1);
 	});
 	delBtn.addEventListener("click", (e) => {
