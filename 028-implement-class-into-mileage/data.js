@@ -12,21 +12,7 @@ class TripData {
 		this._MPG = Number((miles / gallons).toFixed(2));
 		this._tripCost = Number((gallons * price).toFixed(2));
 	}
-	getMiles() {
-		return this._miles;
-	}
-	getGallons() {
-		return this._gallons;
-	}
-	getPrice() {
-		return this._price;
-	}
-	getMPG() {
-		return this._MPG;
-	}
-	getTripCost() {
-		return this._tripCost;
-	}
+	
 }
 
 if (MY_DATA != null) {
@@ -39,8 +25,8 @@ function calcAvg() {
 	if (MY_DATA.length !== 0) {
 		let sums = MY_DATA.reduce(function (sum, obj) {
 			return {
-				_MPG: sum._MPG + obj.getMPG(),
-				_tripCost: sum._tripCost + obj.getTripCost(),
+				_MPG: sum._MPG + obj._MPG,
+				_tripCost: sum._tripCost + obj._tripCost,
 			};
 		});
 		let avgMPG = sums._MPG / MY_DATA.length;

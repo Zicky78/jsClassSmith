@@ -16,3 +16,7 @@ Edit buttons broke and it was simple to just add in the getter in place of the v
 
 Other than that I don't see any other issues right now.
 
+### Oops
+
+I didn't know local storage removes the context, and I apparently didn't test things well enough last commit because immediately upon seeing your second video I refreshed and everything did indeed break haha. Is there a benefit to using the encapsulation syntax in this case if we aren't using getters and setters? 
+

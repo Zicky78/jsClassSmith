@@ -22,9 +22,9 @@ function renderEditDelBtn(index) {
 		btns.forEach((btn) => {
 			btn.disabled = true;
 		});
-		FORM_EL[0].value = MY_DATA[index].getMiles();
-		FORM_EL[1].value = MY_DATA[index].getGallons();
-		FORM_EL[2].value = MY_DATA[index].getPrice();
+		FORM_EL[0].value = MY_DATA[index]._miles;
+		FORM_EL[1].value = MY_DATA[index]._gallons;
+		FORM_EL[2].value = MY_DATA[index]._price;
 		MY_DATA.splice(index, 1);
 	});
 	delBtn.addEventListener("click", (e) => {
