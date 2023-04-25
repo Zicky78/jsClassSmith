@@ -1,69 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Byte Balance</title>
-		<link rel="stylesheet" href="./style.css" />
-		<link rel="stylesheet" href="./modal.css" />
-		<link rel="stylesheet" href="./form.css" />
-		<link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet" />
 
-		<script src="./main.js" type="module"></script>
-		<script src="./render.js" type="module"></script>
-		<script src="./log.js" type="module"></script>
-	</head>
-	<body>
-		<!-- Header with Title and Slogan -->
-		<header>
-			<h1 class="centered">Byte Balance</h1>
-			<h2 class="centered">Storing nutrition one bite at a time</h2>
-		</header>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Byte Balance</title>
+	<link rel="stylesheet" href="./style.css" />
+	<link rel="stylesheet" href="./modal.css" />
+	<link rel="stylesheet" href="./form.css" />
+	<link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet" />
 
-		<!-- Main Output -->
-		<main>
-			<div>
-				<div id="entry-output" class="width-70"></div>
-				<div class="justify-right width-65">
-					<button id="open-modal-btn">Add +</button>
-				</div>
+	<script src="./main.js" type="module"></script>
+	<script src="./render.js" type="module"></script>
+	<script src="./log.js" type="module"></script>
+</head>
+
+<body>
+	<!-- Header with Title and Slogan -->
+	<header>
+		<h1 class="centered">Byte Balance</h1>
+		<h2 class="centered">Storing nutrition one bite at a time</h2>
+	</header>
+
+	<!-- Main Output -->
+	<main>
+		<div id="output-header" class="width-65">
+			<p id="date">April 19, 2023</p>
+			<p>
+				<span>&lt;</span> <span>&gt;</span>
+			</p>
+		</div>
+		<div class="food-headings width-65">
+			<div class="col">
+
+				<p class="underline">Food</p>
 			</div>
-		</main>
+			<div class="col">
+				<p class="underline">Calories</p>
 
-		<!-- Modal -->
-		<section>
-			<div id="modal-container">
-				<div id="modal-content">
-					<form id="form-input">
-						<div id="err"></div>
-						<div class="centered">
-							<label>Food: <input id="food" name="food" type="text" /></label>
-
-							<label
-								>Calories per Serving:
-								<input id="calories" name="calories" type="number"
-							/></label>
-							<label
-								># of Servings: <input id="amount" name="amount" type="number"
-							/></label>
-
-							<label
-								>Exercise <input id="exercise" name="exercise" type="checkbox"
-							/></label>
-							<label class="hidden" id="cal-burned-input"
-								>Calories Burned:
-								<input id="calBurned" name="calBurned" type="number"
-							/></label>
-						</div>
-						<div class="centered">
-							<button id="close-modal-btn" type="button">Cancel</button>
-							<button id="submit-btn">Submit</button>
-						</div>
-					</form>
-				</div>
-				<div id="backdrop"></div>
 			</div>
-		</section>
-	</body>
+			<div class="col">
+				<p class="underline"># of Servings</p>
+			</div>
+		</div>
+		<div id="entry-output" class="width-65"></div>
+		<div id="total-outputs" class="total-outputs width-65">
+			<div class="col">
+				<div class="empty-col"></div>
+			</div>
+			<div class="col">
+				<h3 class="underline">Calories Burned</h3>
+				<p id="exercise-output">0</p>
+			</div>
+			<div class="col">
+				<h3 class="underline">Total Calories</h3>
+				<p id="cal-total-output">0</p>
+			</div>
+		</div>
+		<div class="justify-right width-60">
+			<button id="open-modal-btn">Add +</button>
+		</div>
+	</main>
+
+	<!-- Modal -->
+	<section>
+		<div id="modal-container">
+			<div id="modal-content">
+				<form id="form-input">
+					<div id="err"></div>
+					<div class="row">
+						<label class="underline">Food:</label>
+					</div>
+					<div class="row">
+						<input id="food" name="food" type="text" />
+					</div>
+
+					<div class="row">
+						<div class="form-col">
+							<label class="underline">Calories:</label>
+							<input id="calories" name="calories" type="number" />
+						</div>
+						<div class="form-col">
+							<label class="underline"># of Servings:</label>
+							<input id="amount" name="amount" type="number" />
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-50">
+							<label class="underline">Exercise: </label>
+						</div>
+						<div class="col-50">
+							<label class="hidden underline" id="cal-burned-input">Calories Burned:</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-50">
+							<input id="exercise" name="exercise" type="checkbox" />
+						</div>
+						<div class="col-50">
+							<input id="calBurned" class="hidden" name="calBurned" type="number" />
+						</div>
+					</div>
+
+					<div class="fixed-bottom">
+						<button id="close-modal-btn" type="button">Cancel</button>
+						<button id="submit-btn">Submit</button>
+					</div>
+				</form>
+			</div>
+			<div id="backdrop"></div>
+		</div>
+	</section>
+</body>
+
 </html>
