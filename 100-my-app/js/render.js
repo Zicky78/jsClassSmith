@@ -1,4 +1,4 @@
-import { calLog, entry } from "./log.js";
+import { calLog, entry, findLog, calcTotal } from "./log.js";
 
 const exerciseCheckBox = document.getElementById("exercise");
 const calBurnedInput = document.getElementById("cal-burned-input");
@@ -7,6 +7,7 @@ const entryOutput = document.getElementById("entry-output");
 const ERR = document.getElementById("err");
 const exerciseOutput = document.getElementById("exercise-output");
 const calTotalOutput = document.getElementById("cal-total-output");
+const FORM = document.getElementById("form-input");
 
 // ChatGPT-generated modal code
 const modalContainer = document.getElementById("modal-container");
@@ -20,10 +21,22 @@ function openModal() {
 	backdrop.style.display = "block";
 }
 
+// Controls the event listener for closing the modal
+let modalListener = true;
+
+function toggleModalListenerOn() {
+	if (!modalListener) {
+		modalListener = true;
+	}
+}
+
 // Close the modal
 function closeModal() {
-	modalContainer.style.display = "none";
-	backdrop.style.display = "none";
+	if (modalListener) {
+		modalContainer.style.display = "none";
+		backdrop.style.display = "none";
+		FORM.reset();
+	}
 }
 
 // Open the modal when clicking the open button
@@ -53,7 +66,8 @@ function displayLogBook() {
 	// Loop through each entry
 	calLog.forEach((entry) => {
 		// Loop through each entry's items
-		entry.items.forEach((item) => {
+		let date = entry.date;
+		entry.items.forEach((item, index) => {
 			// Create elements and append them to the DOM
 			let itemOutput = document.createElement("div");
 			itemOutput.classList.add("item-output");
@@ -72,12 +86,66 @@ function displayLogBook() {
 			itemOutput.appendChild(calorieOutput);
 			itemOutput.appendChild(amountOutput);
 
+			// Render the edit and delete buttons
+			renderEditDeleteBtns(itemOutput, item, index, date);
+
 			entryOutput.appendChild(itemOutput);
 		});
 
 		exerciseOutput.textContent = `${entry.calBurned}`;
 		calTotalOutput.textContent = `${entry.calTotal}`;
 	});
+}
+
+// Render the edit and delete buttons
+// Pass in element to append buttons too,
+// the item to fill in the data to the form
+// the index of the item to splice it
+// and the date the item is from to find its correct entry
+function renderEditDeleteBtns(itemOutput, item, index, date) {
+	// Find the entry
+	let entry = findLog(date);
+	// Create the buttons
+	let editBtn = document.createElement("button");
+	let editImg = document.createElement("img");
+	editImg.src = "./img/edit.png";
+	let delBtn = document.createElement("button");
+	let delImg = document.createElement("img");
+	delImg.src = "./img/delete.png";
+	// Append the images to the buttons
+	editBtn.appendChild(editImg);
+	delBtn.appendChild(delImg);
+
+	// Edit button event listener
+	editBtn.addEventListener("click", (e) => {
+		// Open the modal and fill in the form, and splice the item
+		openModal();
+		modalListener = false;
+		FORM.food.value = item.food;
+		FORM.calories.value = item.calories;
+		FORM.amount.value = item.amount;
+		entry.items.splice(index, 1);
+	});
+	// Append edit button
+	itemOutput.appendChild(editBtn);
+	// Delete button event listener
+	delBtn.addEventListener("click", (e) => {
+		// Splice the item
+		entry.items.splice(index, 1);
+		// Recalculate the total and display the log book
+		calcTotal();
+		displayLogBook();
+	});
+
+	// Create a container for the buttons
+	let btnContainer = document.createElement("div");
+	btnContainer.classList.add("btn-container");
+	// Append the buttons to the container
+	btnContainer.appendChild(editBtn);
+	btnContainer.appendChild(delBtn);
+
+	// Append the container to the item output
+	itemOutput.appendChild(btnContainer);
 }
 
 // Display the error messages
@@ -87,4 +155,12 @@ function displayErrors(errors) {
 	ERR.appendChild(msg);
 }
 
-export { displayLogBook, displayErrors, ERR, calBurnedInput };
+export {
+	displayLogBook,
+	displayErrors,
+	ERR,
+	calBurnedInput,
+	FORM,
+	closeModal,
+	toggleModalListenerOn,
+};

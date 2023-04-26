@@ -4,9 +4,10 @@ import {
 	displayErrors,
 	ERR,
 	calBurnedInput,
+	FORM,
+	closeModal,
+	toggleModalListenerOn,
 } from "./render.js";
-
-const FORM = document.getElementById("form-input");
 
 function validateForm(food, calories, amount, exercise, calBurned) {
 	// Clear the error messages on the DOM
@@ -108,6 +109,9 @@ FORM.addEventListener("submit", (e) => {
 
 		// Reset form
 		FORM.reset();
+		toggleModalListenerOn();
+		closeModal();
+
 		calBurnedInput.classList.add("hidden");
 	}
 });

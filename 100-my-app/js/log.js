@@ -39,7 +39,6 @@ function calcTotal() {
 			entry.calTotal += item.calories * item.amount;
 		});
 		entry.calTotal -= entry.calBurned;
-		console.log(entry.calTotal);
 	});
 }
 
