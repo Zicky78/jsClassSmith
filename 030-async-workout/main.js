@@ -6,9 +6,7 @@ formEL.addEventListener("submit", (e) => {
 	let type = e.target.type.value;
 	let reps = parseFloat(e.target.reps.value);
 	let time = parseFloat(e.target.time.value);
-	startWorkout(type, reps).then((workout) => {
-		startTimer(workout, type, time);
-	}).catch((err) => {
+	startWorkout(type, reps, time).then().catch((err) => {
 		console.log(err);
 	});
 	formEL.reset();
@@ -21,14 +19,8 @@ function updateDOM(content, element) {
 	return workout;
 }
 
-function startWorkout(type, reps) {
-	return new Promise(function (resolve, reject) {
-		let workout = updateDOM(`Starting ${type} for ${reps} reps`, "p");
-		resolve(workout);
-	});
-}
-
-function startTimer(workout, type, time) {
+function startWorkout(type, reps, time) {
+	let workout = updateDOM(`Starting ${type} for ${reps} reps`, "p");
 	return new Promise(function (resolve, reject) {
 		setTimeout(() => {
 			workout.textContent = `Finished ${type}`;
