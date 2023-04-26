@@ -6,25 +6,33 @@ formEL.addEventListener("submit", (e) => {
 	let type = e.target.type.value;
 	let reps = parseFloat(e.target.reps.value);
 	let time = parseFloat(e.target.time.value);
-	startWorkout(type, reps, time, startTimer);
+	startWorkout(type, reps).then((workout) => {
+		startTimer(workout, type, time);
+	}).catch((err) => {
+		console.log(err);
+	});
 	formEL.reset();
 });
 
-function startWorkout(type, reps, time, callback) {
-	let workout = document.createElement("p");
-	workout.textContent = `Starting ${type} for ${reps} reps`;
+function updateDOM(content, element) {
+	let workout = document.createElement(element);
+	workout.textContent = content;
 	outputEL.appendChild(workout);
-	callback(workout, type, time);
+	return workout;
+}
+
+function startWorkout(type, reps) {
+	return new Promise(function (resolve, reject) {
+		let workout = updateDOM(`Starting ${type} for ${reps} reps`, "p");
+		resolve(workout);
+	});
 }
 
 function startTimer(workout, type, time) {
-	setTimeout(() => {
-		workout.textContent = `Finished ${type}`;
-	}, time * 60000);
+	return new Promise(function (resolve, reject) {
+		setTimeout(() => {
+			workout.textContent = `Finished ${type}`;
+			resolve(workout);
+		}, time * 60000);
+	});
 }
-
-
-// startWorkout does the first DOM update and calls startTimer
-// startTimer does the second DOM update after a delay. It is passed a reference to the created element so it can update it
-// startTimer is passed as a callback to startWorkout
-// startWorkout is passed as a callback to addEventListener
