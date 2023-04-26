@@ -1,19 +1,15 @@
-function getData() {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(42);
-		}, 1000);
-	});
-}
-
 async function start() {
-	const result = await getData();
-	console.log(result);
+	const data = await fetch('https://api.weather.gov/gridpoints/HNX/53,100/forecast');
+    const result = await data.json();
+	console.log(result.properties.periods[0].shortForecast);
 }
 
-// async function start2() {
-// 	getData().then((result) => console.log(result));
-// }
+async function start2() {
+	fetch('https://api.weather.gov/gridpoints/HNX/53,100/forecast')
+    .then(data => data.json())
+    .then(result => 
+	console.log(result.properties.periods[0].shortForecast));
+}
 
 start();
-// start2();
+start2();
