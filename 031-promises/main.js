@@ -74,13 +74,10 @@
 
 function fetchData() {
     return new Promise(function (resolve, reject) {
-        // This should be the right code for Fresno
-        // Edit: Okay I know this is the right code because before typing the word Fresno,
-        // github copilot was able to recognize the link and fill in the word Fresno for me, just by
-        // seing the forecast office code and coordinates I guess haha. Wild.
-        fetch('https://api.weather.gov/gridpoints/HNX/36,119/forecast') 
+        // Well, I got the office code right but missed the points. Still cool that the ai knew it was fresno though
+        fetch('https://api.weather.gov/gridpoints/HNX/53,100/forecast') 
         .then(response => response.json())
-        .then(data => resolve(data.properties.periods[1].shortForecast))
+        .then(data => resolve(data.properties.periods[0].temperature))
     });
 }
 
