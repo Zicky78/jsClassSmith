@@ -1,9 +1,9 @@
-import { calLog, calcTotal, entry, findLog } from "./log.js";
+import { calLog, entry, findLog } from "./log.js";
 import {
 	displayLogBook,
 	displayErrors,
 	ERR,
-	calBurnedInput,
+	hideCalBurned,
 	FORM,
 	closeModal,
 	toggleModalListenerOn,
@@ -68,7 +68,7 @@ FORM.addEventListener("submit", (e) => {
 
 	if (isValid) {
 		// Get the current date
-		let date = new Date();
+		const date = new Date();
 
 		// Check if there is already an entry for the current date
 		// Returns a false boolean if false, or the entry object if true
@@ -102,7 +102,9 @@ FORM.addEventListener("submit", (e) => {
 		}
 
 		// Re-calculate the totals
-		calcTotal();
+		calLog.forEach((entry) => {
+			entry.calcTotals();
+		});
 
 		// Display log book
 		displayLogBook();
@@ -112,7 +114,8 @@ FORM.addEventListener("submit", (e) => {
 		toggleModalListenerOn();
 		closeModal();
 
-		calBurnedInput.classList.add("hidden");
+		// Hide the calories burned input
+		hideCalBurned();
 	}
 });
 

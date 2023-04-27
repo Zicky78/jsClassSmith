@@ -15,6 +15,8 @@ const calLog = [{
 }]
 */
 
+import { displayLogBook } from "./render.js";
+
 // Calorie logbook holding all of the entries
 const calLog = [];
 
@@ -27,19 +29,29 @@ class entry {
 		this.exercise = exercise;
 		this.calBurned = calBurned;
 	}
-}
 
-// Loop through each entry
-function calcTotal() {
-	calLog.forEach((entry) => {
-		// Reset the calTotal for the entry
-		entry.calTotal = 0;
-		entry.items.forEach((item) => {
-			// Sum the calories of each of the items in the entry
-			entry.calTotal += item.calories * item.amount;
-		});
-		entry.calTotal -= entry.calBurned;
-	});
+	// Calculate the total for the entry
+	calcTotals = function() {
+			// Reset the calTotal for the entry
+			this.calTotal = 0;
+			this.items.forEach((item) => {
+				// Sum the calories of each of the items in the entry
+				this.calTotal += item.calories * item.amount;
+			});
+			this.calTotal -= this.calBurned;
+	}
+
+	deleteItem = function(item) {
+		// Remove the item from the items array
+		this.items.splice(this.items.indexOf(item), 1);
+		// Re-calculate the totals
+		this.calcTotals();
+		// Display log book
+		displayLogBook();
+	}
+
+	
+	
 }
 
 // Check if an entry exists for the current day
@@ -58,4 +70,6 @@ function findLog(date) {
 	return false;
 }
 
-export { calLog, entry, calcTotal, findLog };
+
+
+export { calLog, entry, findLog};
