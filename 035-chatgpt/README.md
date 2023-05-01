@@ -30,4 +30,18 @@ Maybe the AI are closer to us than we think. I've certainly been over-confidentl
 
 Midjourney also just does not know what a lava lamp is. It's idea of a lava lamp is an slightly rounded Erlenmeyer flask filled with rainbow fire. Admittedly that's pretty cool, but it's **not** a lava lamp. 
 
+### Video Thoughts
 
+Chuong: I agree, I think getting into tech is better right now than ever, because I think AI is going to significantly shorten the learning process and allow people to create what they want quicker
+
+Michael: I also hope we dont get full sentience. HE talked about the decision making process becoming more important, and I think its notable to point out that I've had far better results using AI when I know what I want and what I'm looking for, because I've already made those decisions, and I just want the details filled in. 
+
+Anne-Marie: CatGPT is elite. She mentioned needing a diversity of perspectives, and I believe AI will be just another one of those perspectives, but one with a potentially far broader amount of data to form that perspective.
+
+Naomi: It has been crazy just how common it is to hear people talking about AI outside of tech, and I think that's an indicator of how widespread it's impact will be. AI legal policy is definitely going to be an interesting development
+
+Lasith: I agree AI currently can't be trusted to be reliable at the moment, but it's definitely in it's infancy and going to improve. I also agree that companies are going to be creating their own private models to use with their own internal sensitive data. There have already been some data leaks in that regard.
+
+Sanah: AI won't be able to replace education, but many educational institutions are going to be disrupted by AI, and some are beginning to adopt and implement AI into their teachings. Khan Academy for instance now has an integrated AI tutor / assistant. 
+
+David: It's definitely a tool to use, rather than a replacement, and it's important to guide the AI in the direction you want rather than have everything done automatically
