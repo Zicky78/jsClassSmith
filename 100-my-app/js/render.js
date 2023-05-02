@@ -1,4 +1,4 @@
-import { calLog, entry, findLog } from "./log.js";
+import { calLog, entry, findLog, saveLog } from "./log.js";
 
 // All of the DOM elements that need to be accessed
 const exerciseCheckBox = document.querySelector("#exercise");
@@ -136,6 +136,8 @@ function renderEditDeleteBtns(itemOutput, item, entry) {
 		FORM.calories.value = item.calories;
 		FORM.amount.value = item.amount;
 		entry.items.splice(entry.items.indexOf(item), 1);
+		// Save the log
+		saveLog();
 	});
 	// Append edit button
 	itemOutput.appendChild(editBtn);
@@ -144,6 +146,10 @@ function renderEditDeleteBtns(itemOutput, item, entry) {
 	delBtn.addEventListener("click", (e) => {
 		// Delete the item
 		entry.deleteItem(item);
+		// Display the log book
+		displayLogBook();
+		// Save the log
+		saveLog();
 	});
 
 	// Create a container for the buttons

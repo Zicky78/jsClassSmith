@@ -18,7 +18,14 @@ const calLog = [{
 import { displayLogBook } from "./render.js";
 
 // Calorie logbook holding all of the entries
-const calLog = [];
+const calLog = loadLog();
+
+if (calLog !== []) {
+	displayLogBook();
+	calLog.forEach((entry) => {
+		entry.calcTotals();
+	});
+}
 
 // Constructor to make new entries. this.items becomes an array holding the items object that is passed in
 class entry {
@@ -31,27 +38,22 @@ class entry {
 	}
 
 	// Calculate the total for the entry
-	calcTotals = function() {
-			// Reset the calTotal for the entry
-			this.calTotal = 0;
-			this.items.forEach((item) => {
-				// Sum the calories of each of the items in the entry
-				this.calTotal += item.calories * item.amount;
-			});
-			this.calTotal -= this.calBurned;
-	}
+	calcTotals = function () {
+		// Reset the calTotal for the entry
+		this.calTotal = 0;
+		this.items.forEach((item) => {
+			// Sum the calories of each of the items in the entry
+			this.calTotal += item.calories * item.amount;
+		});
+		this.calTotal -= this.calBurned;
+	};
 
-	deleteItem = function(item) {
+	deleteItem = function (item) {
 		// Remove the item from the items array
 		this.items.splice(this.items.indexOf(item), 1);
 		// Re-calculate the totals
 		this.calcTotals();
-		// Display log book
-		displayLogBook();
-	}
-
-	
-	
+	};
 }
 
 // Check if an entry exists for the current day
@@ -70,6 +72,42 @@ function findLog(date) {
 	return false;
 }
 
+// Save the log to local storage
+function saveLog() {
+	// create a new array to store the log in
+	let storedLog = [];
+	// Loop through the log and push each entry to the new array
+	// convert the date and object methods so they can be retrieved from local storage
+	calLog.forEach((entry) => {
+		storedLog.push({
+			date: entry.date.getTime(),
+			items: entry.items,
+			calTotal: entry.calTotal,
+			exercise: entry.exercise,
+			calBurned: entry.calBurned,
+			calcTotals: entry.calcTotals.toString(),
+			deleteItem: entry.deleteItem.toString(),
+		});
+	});
+	// Store the log in local storage
+	localStorage.setItem("storedLog", JSON.stringify(storedLog));
+}
 
+// Load the log from local storage
+function loadLog() {
+	// Retrieve the log from local storage
+	const log = JSON.parse(localStorage.getItem("storedLog"));
+	// Convert the date and object methods so they can be used
+	if (log !== null) {
+		log.forEach((entry) => {
+			entry.calcTotals = new Function("return " + entry.calcTotals)();
+			entry.deleteItem = new Function("return " + entry.deleteItem)();
+			entry.date = new Date(parseInt(entry.date));
+		});
+		return log;
+	} else {
+		return [];
+	}
+}
 
-export { calLog, entry, findLog};
+export { calLog, entry, findLog, saveLog, loadLog };

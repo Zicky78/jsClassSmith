@@ -1,4 +1,4 @@
-import { calLog, entry, findLog } from "./log.js";
+import { calLog, entry, findLog, saveLog } from "./log.js";
 import {
 	displayLogBook,
 	displayErrors,
@@ -113,6 +113,9 @@ FORM.addEventListener("submit", (e) => {
 		FORM.reset();
 		toggleModalListenerOn();
 		closeModal();
+
+		// Save the logbook to local storage
+		saveLog();
 
 		// Hide the calories burned input
 		hideCalBurned();

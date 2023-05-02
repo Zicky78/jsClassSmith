@@ -1,54 +1,26 @@
-## Week 15
+## Week 16
 
-Very simple to implement, the code is nearly the same as the mileage program.
+ChatGPT wasn't the most helpful here due to how my data was structured. 
 
-I didn't use the functionality to disable the edit buttons when they are clicked since edit opens the modal,
-so I instead added functionality that disables closing the modal, and resumes normal functionality once submitted
+My two main issues were not changing the original array when copying it over, and maintaining references to everything as needed
 
-I also made sure to add that closing the modal resets the form
+It suggested changing the functions into strings and then restoring them with the function constructor, and changing the date into a timestamp and doing the same
 
-I didn't know that imported variables are treated as constants, so I had to make a toggleModalListener function when I
-had previously tried just exporting the boolean itself. Its more organized that way though, so it makes sense
-
-I also reorganized the folder structure and removed the old.js file since it's not needed anymore
-
-## Updates:
-
-I had to rename some calBurned stuff since I ran into duplicate names using it too many times. Naming is hard.
-
-I refactored my render to be more modular, taking some inspiration from ChatGPT, though it's code was far less readable, having a separate createElement and createElementWithClass feature instead of using default values to psuedo-overload the function.
-
-I had also wanted to refactor log.js to have the functions become object methods of the entry object so it could have reference to the entry automatically, and when I was copying over the code github copilot suggested:
-
+I was still using map() though which changes the original array, so it suggested the spread operator to make a shallow copy of the array like 
 ```
-this.items.splice(this.items.indexOf(item), 1);
+[...calLog].map((e)=>{})
 ```
 
-instead of what I was using:
-
+I spent some time learning about the spread operator, but in testing, map was still modifying the original array. It then suggested to use Object.assign to copy the array, so I tried:
 ```
-entry.items.splice(index, 1)
-```
+let storedLog = Object.assign([], calLog);
 
-This, along with my object methods refactor meant I could take out a lot of the parameters I was passing around.
-
-Find log still needed to be separate as it's use is to return entries of a specific date.
-
-I also originally tried:
-
-```
-let btns = createEditDelBtns();
-let editBtn = btns['editBtn'];
-let delBtn = btns['delBtn'];
+storedLog.map((e)=>{...})
 ```
 
-but ChatGPT provided this solution that used destructuring, so I went and learned more about that too:
+But then later learned that Object.assign only makes shallow copies of objects that are in arrays, so modifying the new array only using map or forEach still results in changing the originals. It then recommended to use JSON.stringify() and JSON.parse() to serialize the objects, but that would make them lose reference to the functions inside, so it then recommended to just define the functions outside of the object entirely.
 
-```
-let {editBtn, delBtn} = createEditDelBtns();
-```
-
-
+The solution I came up with isn't as concise as I was wanting, but I couldn't find any other way that created a copy of the array, changed some of the properties, kept proper references, and didn't change anything in the original
 
 
 
