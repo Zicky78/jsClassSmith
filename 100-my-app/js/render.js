@@ -9,6 +9,9 @@ const ERR = document.querySelector("#err");
 const exerciseOutput = document.querySelector("#exercise-output");
 const calTotalOutput = document.querySelector("#cal-total-output");
 const FORM = document.querySelector("#form-input");
+const dateOutput = document.querySelector("#date");
+const navLeft = document.querySelector("#nav-left");
+const navRight = document.querySelector("#nav-right");
 
 // ChatGPT-generated modal code
 const modalContainer = document.querySelector("#modal-container");
@@ -60,33 +63,32 @@ exerciseCheckBox.addEventListener("change", (e) => {
 });
 
 // Display the log book
-function displayLogBook() {
+function displayLogBook(entry) {
 	// Clear the display
 	entryOutput.innerHTML = "";
-	// Loop through each entry
-	calLog.forEach((entry) => {
-		// Loop through each entry's items
-		entry.items.forEach((item) => {
-			// Create the item output
-			const itemOutput = createItem(item);
-			// Add the edit and delete buttons
-			renderEditDeleteBtns(itemOutput, item, entry);
-			// Add the item output to the entry output
-			entryOutput.appendChild(itemOutput);
-		});
-
-		exerciseOutput.textContent = `${entry.calBurned}`;
-		calTotalOutput.textContent = `${entry.calTotal}`;
+	// Display the date
+	displayDate(entry.date);
+	// Loop through each entry's items
+	entry.items.forEach((item) => {
+		// Create the item output
+		const itemOutput = createItem(item);
+		// Add the edit and delete buttons
+		renderEditDeleteBtns(itemOutput, item, entry);
+		// Add the item output to the entry output
+		entryOutput.appendChild(itemOutput);
 	});
+
+	exerciseOutput.textContent = `${entry.calBurned}`;
+	calTotalOutput.textContent = `${entry.calTotal}`;
 }
 
 // Create an element, with optional class name and text
 function createElement(element, className = "", text = "") {
 	const el = document.createElement(element);
-	if(text!==""){
+	if (text !== "") {
 		el.textContent = text;
 	}
-	if(className!==""){
+	if (className !== "") {
 		el.classList.add(className);
 	}
 	return el;
@@ -105,31 +107,30 @@ function createItem(item) {
 }
 
 // Create the edit and delete buttons
-function createEditDelBtns(){
+function createEditDelBtns() {
 	// Create the buttons and images
-	const editBtn = createElement('button');
-	const editImg = createElement('img');
-	editImg.src = './img/edit.png';
-	const delBtn = createElement('button');
-	const delImg = createElement('img');
-	delImg.src = './img/delete.png';
+	const editBtn = createElement("button");
+	const editImg = createElement("img");
+	editImg.src = "./img/edit.png";
+	const delBtn = createElement("button");
+	const delImg = createElement("img");
+	delImg.src = "./img/delete.png";
 	// Append the images to the buttons
 	editBtn.appendChild(editImg);
 	delBtn.appendChild(delImg);
 
-	return {editBtn, delBtn}
+	return { editBtn, delBtn };
 }
 
 // Render the edit and delete buttons
 function renderEditDeleteBtns(itemOutput, item, entry) {
-	
 	// Create the buttons
-	const {editBtn, delBtn} = createEditDelBtns();
-	
+	const { editBtn, delBtn } = createEditDelBtns();
 
 	// Edit button event listener
 	editBtn.addEventListener("click", (e) => {
 		// Open the modal and fill in the form, and splice the item
+		console.log(entry);
 		openModal();
 		modalListener = false;
 		FORM.food.value = item.food;
@@ -147,13 +148,13 @@ function renderEditDeleteBtns(itemOutput, item, entry) {
 		// Delete the item
 		entry.deleteItem(item);
 		// Display the log book
-		displayLogBook();
+		displayLogBook(entry);
 		// Save the log
 		saveLog();
 	});
 
 	// Create a container for the buttons
-	const btnContainer = createElement('div', 'btn-container');
+	const btnContainer = createElement("div", "btn-container");
 	// Append the buttons to the container
 	btnContainer.appendChild(editBtn);
 	btnContainer.appendChild(delBtn);
@@ -175,6 +176,53 @@ function hideCalBurned() {
 	calBurnedInput.classList.add("hidden");
 }
 
+// Navigate to the next entry
+function navigateRight() {
+	// Get the date of the currently displayed entry
+	const currentDate = getDateFromPage();
+	// Check if a next entry exists
+	const nextDate = new Date();
+	nextDate.setDate(currentDate.getDate() + 1);
+	const nextEntry = findLog(nextDate);
+	// Display the next entry
+	if (nextEntry) {
+		displayLogBook(nextEntry);
+	}
+}
+
+// Navigate to the previous entry
+function navigateLeft() {
+	// Get the date of the currently displayed entry
+	const currentDate = getDateFromPage();
+	// Check if a previous entry exists
+	const prevDate = new Date();
+	prevDate.setDate(currentDate.getDate() - 1);
+	const prevEntry = findLog(prevDate);
+	// Display the previous entry
+	if (prevEntry) {
+		displayLogBook(prevEntry);
+	}
+}
+
+// Display the date to the screen formatted
+function displayDate(date) {
+	dateOutput.textContent = `${date.toLocaleDateString("en-US", {
+		month: "long",
+		day: "2-digit",
+		year: "numeric",
+	})}`;
+}
+
+// Get the formatted date from the page and return the date object
+function getDateFromPage() {
+	const date = new Date(dateOutput.textContent);
+	return date;
+}
+
+// Add event listeners to the navigation buttons
+navLeft.addEventListener("click", navigateLeft);
+navRight.addEventListener("click", navigateRight);
+
 export {
 	displayLogBook,
 	displayErrors,
@@ -183,4 +231,6 @@ export {
 	FORM,
 	closeModal,
 	toggleModalListenerOn,
+	displayDate,
+	getDateFromPage,
 };

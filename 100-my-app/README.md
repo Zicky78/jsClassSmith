@@ -1,26 +1,17 @@
-## Week 16
+## Week 17
 
-ChatGPT wasn't the most helpful here due to how my data was structured. 
+Since my project was set up with modules from the start, all that was left was to add in the pagination feature.
 
-My two main issues were not changing the original array when copying it over, and maintaining references to everything as needed
+I changed my render function from displaying all entries in a forEach to taking an entry as an argument and just displaying that one, and then added navigation functions to the nav buttons.
 
-It suggested changing the functions into strings and then restoring them with the function constructor, and changing the date into a timestamp and doing the same
+Thankfully it wasn't a big adjustment due to how I had written everything else prior.
 
-I was still using map() though which changes the original array, so it suggested the spread operator to make a shallow copy of the array like 
-```
-[...calLog].map((e)=>{})
-```
+I also made sure to test with the addTestEntry() function enabled and disabled to make sure both versions still worked fine. It's enabled by default, but can be commented out on line 156 of log.js.
 
-I spent some time learning about the spread operator, but in testing, map was still modifying the original array. It then suggested to use Object.assign to copy the array, so I tried:
-```
-let storedLog = Object.assign([], calLog);
+All in all though, I enjoyed this project a lot. Hindsight is 20/20 and using a linked list of objects from the start would have probably been a better implementation. I might refactor this in my own time to implement that rather than searching entries by date all the time. 
 
-storedLog.map((e)=>{...})
-```
 
-But then later learned that Object.assign only makes shallow copies of objects that are in arrays, so modifying the new array only using map or forEach still results in changing the originals. It then recommended to use JSON.stringify() and JSON.parse() to serialize the objects, but that would make them lose reference to the functions inside, so it then recommended to just define the functions outside of the object entirely.
 
-The solution I came up with isn't as concise as I was wanting, but I couldn't find any other way that created a copy of the array, changed some of the properties, kept proper references, and didn't change anything in the original
 
 
 

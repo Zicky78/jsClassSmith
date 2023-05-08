@@ -7,6 +7,7 @@ import {
 	FORM,
 	closeModal,
 	toggleModalListenerOn,
+	getDateFromPage,
 } from "./render.js";
 
 function validateForm(food, calories, amount, exercise, calBurned) {
@@ -68,7 +69,7 @@ FORM.addEventListener("submit", (e) => {
 
 	if (isValid) {
 		// Get the current date
-		const date = new Date();
+		const date = getDateFromPage();
 
 		// Check if there is already an entry for the current date
 		// Returns a false boolean if false, or the entry object if true
@@ -107,7 +108,7 @@ FORM.addEventListener("submit", (e) => {
 		});
 
 		// Display log book
-		displayLogBook();
+		displayLogBook(findLog(date));
 
 		// Reset form
 		FORM.reset();

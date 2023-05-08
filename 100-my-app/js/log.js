@@ -1,31 +1,24 @@
 // Data Structure
 /*
-const calLog = [{entry},...]
+	const calLog = [{entry},...]
 
-const calLog = [{
-    day: Date(),
-    items: [{
-        food: 'apple',
-        calories: 35,
-        amount: 1
-    }],
-    calTotal: 0,
-    exercise: false,
-    calBurned: 0
-}]
+	const calLog = [{
+		day: Date(),
+		items: [{
+			food: 'apple',
+			calories: 35,
+			amount: 1
+		}],
+		calTotal: 0,
+		exercise: false,
+		calBurned: 0
+	},...]
 */
 
-import { displayLogBook } from "./render.js";
+import { displayLogBook, displayDate } from "./render.js";
 
 // Calorie logbook holding all of the entries
 const calLog = loadLog();
-
-if (calLog !== []) {
-	displayLogBook();
-	calLog.forEach((entry) => {
-		entry.calcTotals();
-	});
-}
 
 // Constructor to make new entries. this.items becomes an array holding the items object that is passed in
 class entry {
@@ -109,5 +102,61 @@ function loadLog() {
 		return [];
 	}
 }
+
+// Add a test entry in order to test pagination
+function addTestEntry() {
+	// Get current date
+	const today = new Date();
+	// Create tomorrow date
+	const tomorrow = new Date();
+	tomorrow.setDate(tomorrow.getDate() + 1);
+	// Create test entry data
+	const item = {
+		food: "apple",
+		calories: 35,
+		amount: 1,
+	};
+	const exercise = false;
+	const calBurned = 0;
+	// Create test entries and push them to the log
+	calLog.push(new entry(today, item, exercise, calBurned));
+	calLog.push(new entry(tomorrow, item, exercise, calBurned));
+
+	// Populate second entry with 4 more items
+	let tomorrowLog = findLog(tomorrow);
+	if (tomorrowLog) {
+		for (let i = 0; i < 4; i++) {
+			tomorrowLog.items.push(item);
+		}
+	}
+	// Calculate the totals for each entry
+	calLog.forEach((entry) => {
+		entry.calcTotals();
+	});
+
+	// Display the log and save it
+	displayLogBook(findLog(today));
+	saveLog();
+}
+
+// Initialize the log book
+function initLog() {
+	// Get the current date
+	const date = new Date();
+
+	// If load log returns an array, display the log book
+	// else, display the current date
+	if (calLog.length > 0) {
+		displayLogBook(findLog(date));
+		calLog.forEach((entry) => {
+			entry.calcTotals();
+		});
+	} else {
+		displayDate(date);
+		addTestEntry();
+	}
+}
+
+initLog();
 
 export { calLog, entry, findLog, saveLog, loadLog };
