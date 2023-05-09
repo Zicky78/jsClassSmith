@@ -17,3 +17,47 @@ let test = [];
 let bands: string[] = [];
 bands.push("Van Halen");
 
+// Tuple
+let myTuple: [string, number, boolean] = ["Zach", 24, true];
+
+let mixed = ["John", 1, false];
+
+mixed = myTuple;
+
+// myTuple = mixed;
+
+myTuple[1] = 42;
+
+// Objects
+
+let myObj: object;
+myObj = [];
+console.log(typeof myObj);
+myObj = bands;
+myObj = {};
+
+const exampleObj = {
+	prop1: "Zach",
+	prop2: true,
+};
+
+type Guitarist = {
+	name: string;
+	active: boolean;
+	albums: (string | number)[];
+};
+
+let evh: Guitarist = {
+	name: "Eddie Van Halen",
+	active: true,
+	albums: ["OU812", 1984, 5150],
+};
+
+let jp: Guitarist = {
+	name: "Jimmy",
+	active: true,
+	albums: ["I", "II", "IV"],
+};
+
+evh = jp;
+

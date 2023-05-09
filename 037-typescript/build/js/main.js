@@ -11,3 +11,30 @@ guitars.unshift("Jim");
 let test = [];
 let bands = [];
 bands.push("Van Halen");
+// Tuple
+let myTuple = ["Zach", 24, true];
+let mixed = ["John", 1, false];
+mixed = myTuple;
+// myTuple = mixed;
+myTuple[1] = 42;
+// Objects
+let myObj;
+myObj = [];
+console.log(typeof myObj);
+myObj = bands;
+myObj = {};
+const exampleObj = {
+    prop1: "Zach",
+    prop2: true,
+};
+let evh = {
+    name: "Eddie Van Halen",
+    active: true,
+    albums: ["OU812", 1984, 5150],
+};
+let jp = {
+    name: "Jimmy",
+    active: true,
+    albums: ["I", "II", "IV"],
+};
+evh = jp;
