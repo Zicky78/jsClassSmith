@@ -1,8 +1,11 @@
 "use strict";
-let username = "Zach";
-console.log(username);
-let a = 12;
-let b = "6";
-let c = 2;
-console.log(a / b);
-console.log(c * b);
+let myName;
+let meaningOfLife;
+let isLoading;
+let album;
+myName = "Zach";
+myName = "Zachary";
+meaningOfLife = 42;
+isLoading = true;
+album = "Van Halen";
+album = true;

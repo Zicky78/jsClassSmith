@@ -1,9 +1,11 @@
-let username = "Zach";
-console.log(username);
+let myName: string;
+let meaningOfLife: number;
+let isLoading: boolean;
+let album: any;
 
-let a: number = 12;
-let b: string = "6";
-let c: number = 2;
-
-console.log(a / b);
-console.log(c * b);
+myName = "Zach";
+myName = "Zachary";
+meaningOfLife = 42;
+isLoading = true;
+album = "Van Halen";
+album = true;
