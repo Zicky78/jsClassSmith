@@ -1,6 +1,6 @@
 // Data Structure
 /*
-	const calLog = [{entry},...]
+	const calLog = [{Entry},...]
 
 	const calLog = [{
 		day: Date(),
@@ -21,7 +21,7 @@ import { displayLogBook, displayDate } from "./render.js";
 const calLog = loadLog();
 
 // Constructor to make new entries. this.items becomes an array holding the items object that is passed in
-class entry {
+class Entry {
 	constructor(date, item, exercise, calBurned) {
 		this.date = date;
 		this.items = [item];
@@ -30,12 +30,12 @@ class entry {
 		this.calBurned = calBurned;
 	}
 
-	// Calculate the total for the entry
+	// Calculate the total for the Entry
 	calcTotals = function () {
-		// Reset the calTotal for the entry
+		// Reset the calTotal for the Entry
 		this.calTotal = 0;
 		this.items.forEach((item) => {
-			// Sum the calories of each of the items in the entry
+			// Sum the calories of each of the items in the Entry
 			this.calTotal += item.calories * item.amount;
 		});
 		this.calTotal -= this.calBurned;
@@ -49,16 +49,16 @@ class entry {
 	};
 }
 
-// Check if an entry exists for the current day
-// Returns the entry if true, and false if false
+// Check if an Entry exists for the current day
+// Returns the Entry if true, and false if false
 function findLog(date) {
-	for (const entry of calLog) {
+	for (const Entry of calLog) {
 		if (
-			entry.date.getDate() === date.getDate() &&
-			entry.date.getMonth() === date.getMonth() &&
-			entry.date.getYear() === date.getYear()
+			Entry.date.getDate() === date.getDate() &&
+			Entry.date.getMonth() === date.getMonth() &&
+			Entry.date.getYear() === date.getYear()
 		) {
-			return entry;
+			return Entry;
 		}
 	}
 
@@ -69,17 +69,17 @@ function findLog(date) {
 function saveLog() {
 	// create a new array to store the log in
 	let storedLog = [];
-	// Loop through the log and push each entry to the new array
+	// Loop through the log and push each Entry to the new array
 	// convert the date and object methods so they can be retrieved from local storage
-	calLog.forEach((entry) => {
+	calLog.forEach((Entry) => {
 		storedLog.push({
-			date: entry.date.getTime(),
-			items: entry.items,
-			calTotal: entry.calTotal,
-			exercise: entry.exercise,
-			calBurned: entry.calBurned,
-			calcTotals: entry.calcTotals.toString(),
-			deleteItem: entry.deleteItem.toString(),
+			date: Entry.date.getTime(),
+			items: Entry.items,
+			calTotal: Entry.calTotal,
+			exercise: Entry.exercise,
+			calBurned: Entry.calBurned,
+			calcTotals: Entry.calcTotals.toString(),
+			deleteItem: Entry.deleteItem.toString(),
 		});
 	});
 	// Store the log in local storage
@@ -92,10 +92,10 @@ function loadLog() {
 	const log = JSON.parse(localStorage.getItem("storedLog"));
 	// Convert the date and object methods so they can be used
 	if (log !== null) {
-		log.forEach((entry) => {
-			entry.calcTotals = new Function("return " + entry.calcTotals)();
-			entry.deleteItem = new Function("return " + entry.deleteItem)();
-			entry.date = new Date(parseInt(entry.date));
+		log.forEach((Entry) => {
+			Entry.calcTotals = new Function("return " + Entry.calcTotals)();
+			Entry.deleteItem = new Function("return " + Entry.deleteItem)();
+			Entry.date = new Date(parseInt(Entry.date));
 		});
 		return log;
 	} else {
@@ -103,14 +103,14 @@ function loadLog() {
 	}
 }
 
-// Add a test entry in order to test pagination
+// Add a test Entry in order to test pagination
 function addTestEntry() {
 	// Get current date
 	const today = new Date();
 	// Create tomorrow date
 	const tomorrow = new Date();
 	tomorrow.setDate(tomorrow.getDate() + 1);
-	// Create test entry data
+	// Create test Entry data
 	const item = {
 		food: "apple",
 		calories: 35,
@@ -119,19 +119,19 @@ function addTestEntry() {
 	const exercise = false;
 	const calBurned = 0;
 	// Create test entries and push them to the log
-	calLog.push(new entry(today, item, exercise, calBurned));
-	calLog.push(new entry(tomorrow, item, exercise, calBurned));
+	calLog.push(new Entry(today, item, exercise, calBurned));
+	calLog.push(new Entry(tomorrow, item, exercise, calBurned));
 
-	// Populate second entry with 4 more items
+	// Populate second Entry with 4 more items
 	let tomorrowLog = findLog(tomorrow);
 	if (tomorrowLog) {
 		for (let i = 0; i < 4; i++) {
 			tomorrowLog.items.push(item);
 		}
 	}
-	// Calculate the totals for each entry
-	calLog.forEach((entry) => {
-		entry.calcTotals();
+	// Calculate the totals for each Entry
+	calLog.forEach((Entry) => {
+		Entry.calcTotals();
 	});
 
 	// Display the log and save it
@@ -148,8 +148,8 @@ function initLog() {
 	// else, display the current date
 	if (calLog.length > 0) {
 		displayLogBook(findLog(date));
-		calLog.forEach((entry) => {
-			entry.calcTotals();
+		calLog.forEach((Entry) => {
+			Entry.calcTotals();
 		});
 	} else {
 		displayDate(date);
@@ -159,4 +159,4 @@ function initLog() {
 
 initLog();
 
-export { calLog, entry, findLog, saveLog, loadLog };
+export { calLog, Entry, findLog, saveLog, loadLog };

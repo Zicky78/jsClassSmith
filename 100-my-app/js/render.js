@@ -1,4 +1,4 @@
-import { calLog, entry, findLog, saveLog } from "./log.js";
+import { calLog, Entry, findLog, saveLog } from "./log.js";
 
 // All of the DOM elements that need to be accessed
 const exerciseCheckBox = document.querySelector("#exercise");
@@ -63,23 +63,23 @@ exerciseCheckBox.addEventListener("change", (e) => {
 });
 
 // Display the log book
-function displayLogBook(entry) {
+function displayLogBook(Entry) {
 	// Clear the display
 	entryOutput.innerHTML = "";
 	// Display the date
-	displayDate(entry.date);
-	// Loop through each entry's items
-	entry.items.forEach((item) => {
+	displayDate(Entry.date);
+	// Loop through each Entry's items
+	Entry.items.forEach((item) => {
 		// Create the item output
 		const itemOutput = createItem(item);
 		// Add the edit and delete buttons
-		renderEditDeleteBtns(itemOutput, item, entry);
-		// Add the item output to the entry output
+		renderEditDeleteBtns(itemOutput, item, Entry);
+		// Add the item output to the Entry output
 		entryOutput.appendChild(itemOutput);
 	});
 
-	exerciseOutput.textContent = `${entry.calBurned}`;
-	calTotalOutput.textContent = `${entry.calTotal}`;
+	exerciseOutput.textContent = `${Entry.calBurned}`;
+	calTotalOutput.textContent = `${Entry.calTotal}`;
 }
 
 // Create an element, with optional class name and text
@@ -123,20 +123,20 @@ function createEditDelBtns() {
 }
 
 // Render the edit and delete buttons
-function renderEditDeleteBtns(itemOutput, item, entry) {
+function renderEditDeleteBtns(itemOutput, item, Entry) {
 	// Create the buttons
 	const { editBtn, delBtn } = createEditDelBtns();
 
 	// Edit button event listener
 	editBtn.addEventListener("click", (e) => {
 		// Open the modal and fill in the form, and splice the item
-		console.log(entry);
+		console.log(Entry);
 		openModal();
 		modalListener = false;
 		FORM.food.value = item.food;
 		FORM.calories.value = item.calories;
 		FORM.amount.value = item.amount;
-		entry.items.splice(entry.items.indexOf(item), 1);
+		Entry.items.splice(Entry.items.indexOf(item), 1);
 		// Save the log
 		saveLog();
 	});
@@ -146,9 +146,9 @@ function renderEditDeleteBtns(itemOutput, item, entry) {
 	// Delete button event listener
 	delBtn.addEventListener("click", (e) => {
 		// Delete the item
-		entry.deleteItem(item);
+		Entry.deleteItem(item);
 		// Display the log book
-		displayLogBook(entry);
+		displayLogBook(Entry);
 		// Save the log
 		saveLog();
 	});
@@ -176,29 +176,29 @@ function hideCalBurned() {
 	calBurnedInput.classList.add("hidden");
 }
 
-// Navigate to the next entry
+// Navigate to the next Entry
 function navigateRight() {
-	// Get the date of the currently displayed entry
+	// Get the date of the currently displayed Entry
 	const currentDate = getDateFromPage();
-	// Check if a next entry exists
+	// Check if a next Entry exists
 	const nextDate = new Date();
 	nextDate.setDate(currentDate.getDate() + 1);
 	const nextEntry = findLog(nextDate);
-	// Display the next entry
+	// Display the next Entry
 	if (nextEntry) {
 		displayLogBook(nextEntry);
 	}
 }
 
-// Navigate to the previous entry
+// Navigate to the previous Entry
 function navigateLeft() {
-	// Get the date of the currently displayed entry
+	// Get the date of the currently displayed Entry
 	const currentDate = getDateFromPage();
-	// Check if a previous entry exists
+	// Check if a previous Entry exists
 	const prevDate = new Date();
 	prevDate.setDate(currentDate.getDate() - 1);
 	const prevEntry = findLog(prevDate);
-	// Display the previous entry
+	// Display the previous Entry
 	if (prevEntry) {
 		displayLogBook(prevEntry);
 	}

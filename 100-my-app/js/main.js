@@ -1,4 +1,4 @@
-import { calLog, entry, findLog, saveLog } from "./log.js";
+import { calLog, Entry, findLog, saveLog } from "./log.js";
 import {
 	displayLogBook,
 	displayErrors,
@@ -71,11 +71,11 @@ FORM.addEventListener("submit", (e) => {
 		// Get the current date
 		const date = getDateFromPage();
 
-		// Check if there is already an entry for the current date
-		// Returns a false boolean if false, or the entry object if true
+		// Check if there is already an Entry for the current date
+		// Returns a false boolean if false, or the Entry object if true
 		let foundEntry = findLog(date);
 
-		//Create an object "items" to store a food entry
+		//Create an object "items" to store a food Entry
 		let item = {};
 
 		// If food was entered, update items
@@ -87,7 +87,7 @@ FORM.addEventListener("submit", (e) => {
 			};
 		}
 
-		//Update found entry if found, or create new entry if not found
+		//Update found Entry if found, or create new Entry if not found
 		if (foundEntry) {
 			// Push items to the items array if food was entered
 			if (food) {
@@ -98,13 +98,13 @@ FORM.addEventListener("submit", (e) => {
 				foundEntry.calBurned += calBurned;
 			}
 		} else {
-			// Push a new entry with the created data to the calorie logbook
-			calLog.push(new entry(date, item, exercise, calBurned));
+			// Push a new Entry with the created data to the calorie logbook
+			calLog.push(new Entry(date, item, exercise, calBurned));
 		}
 
 		// Re-calculate the totals
-		calLog.forEach((entry) => {
-			entry.calcTotals();
+		calLog.forEach((Entry) => {
+			Entry.calcTotals();
 		});
 
 		// Display log book
@@ -147,5 +147,5 @@ FORM.addEventListener("submit", (e) => {
 //      Re-display and re-store in local storage
 
 // Delete Entries
-//      Delete entry from data
+//      Delete Entry from data
 //      Re-display and re-store in local storage
